@@ -1,19 +1,15 @@
 import React from "react";
 import css from './Header.module.css'
+import { NavLink} from "react-router-dom";
 function Header(props) {
-    let elems = [
-        {name : 'Home'},
-        {name : 'List'},
-        {name : 'Categories'},
-        {name : 'Help'}
-        ];
     return(
         <header className={css.header}>
             Menu
             <ul>
-            {
-                elems.map((el=> <li><a href="#">{el.name}</a></li> ))
-            }
+                <li><NavLink to="/" >Home</NavLink></li>
+                <li><NavLink to="/list" >List</NavLink></li>
+                <li><NavLink to="/categories" >Categories</NavLink></li>
+                <li><NavLink to="/help" >Help</NavLink></li>
             </ul>
         </header>
     )
