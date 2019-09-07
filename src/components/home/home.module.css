@@ -1,7 +1,30 @@
 .home{}
 .home input{
     font-size: 1.2em;
-}
-.home input[type=button]{
     margin-left: 0.3em;
+    margin-right: 0.3em;
+}
+
+@media (max-width: 900px) {
+    .home input{
+        margin-left: 0;
+        margin-bottom: 0.3em;
+    }
+}
+
+.home input[type=button]{
+    margin-left: 0;
+}
+
+.dateSelect{
+    margin-bottom: 0.5em;
+}
+
+.dateSelect :first-child{
+    margin-right: 0.3em;
+}
+.home button{
+    margin-right: 0.3em;
+    background: white;
+    font-size: 1.2em;
 }
