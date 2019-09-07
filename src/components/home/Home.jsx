@@ -19,6 +19,9 @@ function Home(props) {
                 <input value="Add new entry" type="button" onClick={addNewEntry}/>
                 <input value="Accept selected" type="button" onClick={addNewEntry}/>
                 <input value="Delete selected" type="button" onClick={addNewEntry}/>
+                <input value="Select all" type="button" onClick={addNewEntry}/>
+                <input value="deselect all" type="button" onClick={addNewEntry}/>
+                <hr/>
             {entrys.map(el=>
                 <Entry name={el.name} unique={el.unique} />
             )}
