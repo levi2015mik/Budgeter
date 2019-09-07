@@ -10,7 +10,7 @@ import css from './app.module.css';
 function App() {
 
     return (
-        <div className="App">
+        <div className={css.App}>
             <HashRouter>
                 <Header className={css.header}/>
                 <Route exact path="/" render={Home}/>
