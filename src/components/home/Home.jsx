@@ -5,13 +5,8 @@ function Home(props) {
     function addNewEntry(ev) {
         console.log(ev);
     }
-    // Временный хардкод позиций
-    const entrys = [
-        {name:"Торт с марципаном", unique:0},
-        {name:"Укроп", unique:1},
-        {name:"Горчица", unique:2},
-        {name:"Набор юный террорист из супермаркета", unique:3},
-    ];
+    // TODO Change props.entries to filtred position
+    const entries = props.entries;
 
     // TODO Transform DataSelect to separated element
     const day = new Date().toLocaleDateString();
@@ -30,7 +25,7 @@ function Home(props) {
                 <input value="Select all" type="button" onClick={addNewEntry}/>
                 <input value="deselect all" type="button" onClick={addNewEntry}/>
                 <hr/>
-            {entrys.map(el=>
+            {entries.map(el=>
                 <Entry name={el.name} unique={el.unique} />
             )}
         </div>
