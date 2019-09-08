@@ -1,8 +1,9 @@
-const CHANGE_ENTER_FIELD = "CHANGE_ENTER_FIELD";
 const ADD_NEW_ENTRY = "ADD_NEW_ENTRY";
+const CHANGE_ENTER_FIELD = "CHANGE_ENTER_FIELD";
 const FILTER_OUTPUT = "FILTER_OUTPUT";
 const DELETE_ENTRY = "DELETE_ENTRY";
 const ACCEPT = "ACCEPT";
+
 
 const DEFAULT_STATE = {
     entries:[
@@ -23,9 +24,9 @@ const DEFAULT_STATE = {
 };
 function HomeReducer(state = DEFAULT_STATE,action) {
 
-    switch (action){
+    switch (action.type){
         case CHANGE_ENTER_FIELD:
-            return state;
+            return { ...state,newEntryName: action.value };
         case ADD_NEW_ENTRY:
             return state;
         case FILTER_OUTPUT:
@@ -37,4 +38,9 @@ function HomeReducer(state = DEFAULT_STATE,action) {
         default: return state;
     }
 }
-export default HomeReducer;
+export {ADD_NEW_ENTRY,
+    CHANGE_ENTER_FIELD,
+    FILTER_OUTPUT,
+    DELETE_ENTRY,
+    ACCEPT}
+export default HomeReducer

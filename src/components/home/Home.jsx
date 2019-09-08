@@ -5,11 +5,15 @@ function Home(props) {
     function addNewEntry(ev) {
         console.log(ev);
     }
-    // TODO Change props.entries to filtred position
+
+    function changeField(ev) {
+        props.changeTextField(ev.target.value)
+    }
     const entries = props.entries;
 
     // TODO Transform DataSelect to separated element
     const day = new Date().toLocaleDateString();
+
 
     return(
         <div className={css.home}>
@@ -17,7 +21,7 @@ function Home(props) {
                 <input value="<" type="button" onClick={addNewEntry}/>
                 <button>{day}</button>
                 <input value=">" type="button" onClick={addNewEntry}/>
-                <input placeholder="Name of entry" size="40"/>
+                <input value={props.textFieldValue} onChange={changeField} placeholder="Name of entry" size="40"/>
                 <input value="Add new entry" type="button" onClick={addNewEntry}/>
             </div>
                 <input value="Accept selected" type="button" onClick={addNewEntry}/>
