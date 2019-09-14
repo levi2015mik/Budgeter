@@ -6,29 +6,33 @@
     margin: 1.5em auto;
     border: solid 1px #333333;
     background: white;
-    padding: 2em;
-    width: 16em;
+    padding: 0.5em;
+    width: 18em;
 }
 @media (min-width: 600px) and (max-width: 900px){
     .content{
         width: 30em;
+        padding: 2em;
     }
 }
 
 @media (min-width: 900px) and (max-width: 1200px){
     .content{
         width: 50em;
+        padding: 2em;
     }
 }
 
 @media (min-width: 1200px) and (max-width: 1600px){
     .content{
         width: 60em;
+        padding: 2em;
     }
 }
 
 @media (min-width: 1600px) {
     .content{
         width: 75em;
+        padding: 2em;
     }
 }

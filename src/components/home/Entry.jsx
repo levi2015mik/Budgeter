@@ -15,8 +15,8 @@ function Entry(props) {
                 checked={props.selected}
             />
 
-            <span className={css.textContainer}>
-                <span style={gray}><label htmlFor={id}>{props.name}</label></span>
+            <span className={css.textContainer} style={gray}>
+                <label htmlFor={id}>{props.name}</label>
             </span>
             <span className={css.btnContainer}>
                 <input

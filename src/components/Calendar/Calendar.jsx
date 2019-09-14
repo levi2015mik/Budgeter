@@ -2,6 +2,7 @@ import moment from "moment"
 import "moment/locale/ru"
 import "moment/locale/he"
 import React, {useState} from "react";
+import css from "./Calendar.module.css"
 
 /**
  * Календарь - компонент выбора дня - недели - месяца - года, имеющий собственное состояние
@@ -17,6 +18,7 @@ function Calendar(props){
     // Названия месяцев и дней недели из локализаторов moment
     let week = moment.weekdaysShort();
     let monthNames = moment.months();
+    let weekStr = [];
 
     let weekCorrector = 0;
     let dayNames = [];
@@ -35,13 +37,33 @@ function Calendar(props){
 
     }
 
-    function tooday() {
-        setNow(moment())
+    function today() {
+        let now = moment();
+        setNow(moment());
+        setSelectedDate(now.date())
     }
 
+    // Видимость календаря
     let [viewType, setViewType] = useState(false);
     function toggleEl() {
         setViewType(!viewType);
+    }
+
+    // Селектор выбора день/ месяц/ год
+    let [selector, setSelector] = useState("d");
+    function selectorChange(ev) {
+        setSelector(ev.currentTarget.value)
+    }
+
+    // Выбранная дата
+    let [selectedDate, setSelectedDate] = useState(moment().date());
+    function changeSelectedDate(date) {
+        setSelectedDate(date)
+    }
+
+    function output() {
+        setViewType(false);
+        props.conditions(now.year(),now.month(),selectedDate,selector)
     }
 
     // Задание первого и последнего дней
@@ -55,31 +77,38 @@ function Calendar(props){
         else startMonth = startMonth - 1
     }
 
-
     for(let i = 0;i < 7;i ++){
+        weekStr[i] = week[i + weekCorrector];
+        if(i === 6 && weekCorrector) weekStr[i] = week[0];
+    }
+    for(let i = 0;i < 6;i ++){
         dayNames[i] = [];
-        for(let j = 0;j < 7;j ++){
 
-            if(i===0) {
-                dayNames[i][j] = {value:week[j + weekCorrector]};
-                if(j === 6 && weekCorrector) dayNames[i][j] = {value:week[0]};
-                continue;
-            }
-            if(i >= 1 && j >= startMonth && dayNum === 0){
+        for(let j = 0;j < 7;j ++){
+            if(j >= startMonth && dayNum === 0){
                 dayNum ++ ;
                 dayNames[i][j] = {value:dayNum};
+                if(dayNum === selectedDate) {
+                    dayNames[i].selected = true;
+                    dayNames[i][j].selected = true;
+                }
                 continue;
             }
-            if(i >= 1 && dayNum > 0 && dayNum < endMonth){
+            if(dayNum > 0 && dayNum < endMonth){
                 dayNum ++ ;
                 dayNames[i][j] = {value:dayNum};
+                if(dayNum === selectedDate) {
+                    dayNames[i].selected = true;
+                    dayNames[i][j].selected = true;
+                }
                 continue;
             }
+
             dayNames[i][j] = {value:""};
         }
     }
     return <div>
-        <div>
+        <div className={css.header}>
             <input type="button" value="<<" onClick={()=>{
                 subNow("Y")
             }}/>
@@ -95,25 +124,38 @@ function Calendar(props){
             }}/>
         </div>
         {viewType &&
-            <div>
-        <table><tbody>
+        <div className={css.cal}>
+        <table>
+            <thead>
+            <tr>
+                {weekStr.map((el)=>
+                    <th>{el}</th>
+                )}
+            </tr>
+            </thead>
+            <tbody className={selector === "M" || selector === "Y"? `${css.selected} ${css.targeted}`: "" }>
         {dayNames.map(el =>
-            <tr>{
+            <tr
+                className={`${el.selected? css.selected: ""} ${selector === "w"? css.targeted:""}`}
+            >{
                 el.map(val=>
-                    <td>{val.value}</td>
+                    <td
+                        className={`${val.selected? css.selected: ""} ${selector === "d"? css.targeted:""}`}
+                        onClick={()=>{changeSelectedDate(val.value)}}>{val.value}</td>
                 )
             }</tr>
         )}</tbody>
         </table>
-        <div>
-            Select
-            <input type="radio" name="selector" id="y"/><label for="y">Year</label><br/>
-            <input type="radio" name="selector" id="m"/><label for="m">Month</label><br/>
-            <input type="radio" name="selector" id="d"/><label for="d">Day</label>
+        <div className={css.selector}>
+            <h3>Select</h3>
+            <label><input type="radio" value={"Y"} name="selector" onChange={selectorChange} checked={selector === "Y"} />Year</label><br/>
+            <label><input type="radio" value={"M"} name="selector" onChange={selectorChange} checked={selector === "M"} />Month</label><br/>
+            <label><input type="radio" value={"w"} name="selector" onChange={selectorChange} checked={selector === "w"} />Week</label><br/>
+            <label><input type="radio" value={"d"} name="selector" onChange={selectorChange} checked={selector === "d"} />Day</label>
         </div>
         <div>
-            <input type="button" value="Now" onClick={tooday}/>
-            <input type="button" value="Select"/>
+            <input type="button" value="Now" onClick={today}/>
+            <input type="button" value="OK" onClick={output}/>
         </div>
         </div>}
     </div>

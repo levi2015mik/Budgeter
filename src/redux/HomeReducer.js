@@ -8,13 +8,6 @@ const CHANGE_SELECTION_ALL = "CHANGE_SELECTION_ALL";
 
 
 const DEFAULT_STATE = {
-    entries:[
-        {name:"Торт с марципаном", id:0, accepted:true, selected: false},
-        {name:"Укроп", id:1, accepted:false, selected: false},
-        {name:"Горчица", id:2, accepted:false, selected: false},
-        {name:"Набор юный террорист из супермаркета", id:3, accepted:false, selected: false},
-        {name:"Шакшука с кофе", id:4, accepted:false, selected: false},
-    ],
     filteredEntries:[
         {name:"Торт с марципаном", id:0, accepted:true, selected: false},
         {name:"Укроп", id:1, accepted:false, selected: false},
@@ -23,7 +16,6 @@ const DEFAULT_STATE = {
         {name:"Шакшука с кофе", id:4, accepted:false, selected: false},
     ],
     newEntryName:"",
-    filter:{},
 };
 function HomeReducer(state = DEFAULT_STATE,action) {
 
@@ -33,15 +25,14 @@ function HomeReducer(state = DEFAULT_STATE,action) {
             return { ...state,newEntryName: action.value };
 
         case ADD_NEW_ENTRY:
-            let maxId = state.entries.length;
+            let maxId = state.filteredEntries.length;
             let newEntry = {name:state.newEntryName,id: maxId};
             let stateCp = {
                 ...state,
-                entries:[...state.entries,newEntry],
+                filteredEntries:[...state.filteredEntries,newEntry],
                 newEntryName:""
             };
             stateCp.maxId ++;
-            stateCp.filteredEntries = [...state.entries,newEntry];
             return stateCp;
 
         case FILTER_OUTPUT:
@@ -49,36 +40,36 @@ function HomeReducer(state = DEFAULT_STATE,action) {
 
         case DELETE:
             if(action.value){
-                let entries = state.entries.filter((el) => el.id !== action.value);
-                return { ...state,entries:entries,filteredEntries:entries}
+                let entries = state.filteredEntries.filter((el) => el.id !== action.value);
+                return { ...state,filteredEntries:entries}
             } else {
-                let entries = state.entries.filter((el) => !el.selected);
-                return { ...state,entries:entries,filteredEntries:entries}
+                let entries = state.filteredEntries.filter((el) => !el.selected);
+                return { ...state,filteredEntries:entries}
 
             }
 
         case ACCEPT:
             if(action.value) {
-                let entries = state.entries.map((el)=>{
+                let entries = state.filteredEntries.map((el)=>{
                     if(el.id === action.value){
                         el.accepted = true;
                     }
                     return el;
                 });
-                return { ...state,entries:entries,filteredEntries:entries}
+                return { ...state,filteredEntries:entries}
             } else {
-                let entries = state.entries.map((el)=>{
+                let entries = state.filteredEntries.map((el)=>{
                     let selected = el.selected;
                     el.selected = false;
                     if(selected) el.accepted = true;
                     return el;
                 });
-                return { ...state,entries:entries,filteredEntries:entries};
+                return { ...state,filteredEntries:entries};
             }
 
 
         case CHANGE_SELECTION: {
-            let entries = state.entries.map((el) => {
+            let entries = state.filteredEntries.map((el) => {
                 if (el.id === action.value) el.selected = !el.selected;
                 return el;
             });
@@ -86,7 +77,7 @@ function HomeReducer(state = DEFAULT_STATE,action) {
         }
 
         case CHANGE_SELECTION_ALL: {
-            let entries = state.entries.map((el) => {
+            let entries = state.filteredEntries.map((el) => {
                 if(!el.accepted)
                 el.selected = action.value;
                 return el;

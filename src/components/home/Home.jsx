@@ -1,6 +1,9 @@
 import React from "react";
 import css from "./home.module.css"
 import Entry from "./Entry"
+import Calendar from "../Calendar/Calendar";
+
+
 function Home(props) {
     function addNewEntry(ev) {
         console.log(ev);
@@ -18,10 +21,8 @@ function Home(props) {
     return(
         <div className={css.home}>
             <div className={css.dateSelect}>
-                <input value="<" type="button" onClick={addNewEntry}/>
-                <button>{day}</button>
-                <input value=">" type="button" onClick={addNewEntry}/>
-                <input value={props.textFieldValue} onChange={changeField} placeholder="Name of entry" size="40"/>
+                <Calendar locale="ru" conditions={()=>{}}/>
+                <input value={props.textFieldValue} type="text" onChange={changeField} placeholder="Name of entry" />
                 <input value="Add new entry" type="button" onClick={props.addNewEntry}/>
             </div>
                 <input value="Accept selected" type="button" onClick={props.acceptSelected}/>

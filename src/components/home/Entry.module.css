@@ -16,3 +16,20 @@
     margin-left: 0.3em;
     font-size: 1.2em;
 }
+
+@media (max-width: 760px){
+    .entry{font-size: 0.9em}
+    .entry input[type=button] {font-size: 0.9em}
+    .textContainer{
+        width:20em;
+        display:inline-block;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 600px) {
+    .textContainer{
+        width:12em;
+    }
+}

@@ -1,0 +1,33 @@
+.cal{
+    position: absolute;
+    margin-top: 0.1em;
+    border: solid 1px #333333;
+    background: white;
+    padding: 1em;
+}
+.header input{
+    margin-left: 0;
+    margin-right: 0;
+}
+.header button{
+    margin-left: 0;
+    margin-right: 0;
+}
+.cal table{
+    display: inline-block;
+    margin-bottom: 0.5em;
+}
+.selector{
+    margin-top: 0.2em;
+    margin-left: 0.5em;
+    display: inline-block;
+    vertical-align: top;
+}
+.selector h3{
+    margin-top: 0;
+    margin-bottom: 0.5em;
+}
+.selected.targeted{
+    background: #68abad;
+}
+.targeted{}
