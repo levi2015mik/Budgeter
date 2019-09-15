@@ -1,3 +1,22 @@
+.element{
+    display: inline-block;
+    float: right;
+}
+@media (max-width: 1200px) {
+    .element{
+        display: block;
+        float:none;
+    }
+}
+.label{
+    margin-right: 0.5em;
+    margin-top: 0.3em;
+}
+@media (max-width: 600px){
+    .label{
+        display: block;
+    }
+}
 .cal{
     position: absolute;
     margin-top: 0.1em;

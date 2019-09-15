@@ -7,7 +7,6 @@ function Header(props) {
             Personal accounting application
             <ul>
                 <li><NavLink to="/" >Home</NavLink></li>
-                <li><NavLink to="/list" >List</NavLink></li>
                 <li><NavLink to="/categories" >Categories</NavLink></li>
                 <li><NavLink to="/help" >Help</NavLink></li>
             </ul>

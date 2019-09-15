@@ -59,12 +59,13 @@ function Calendar(props){
     // Выбранная дата
     let [selectedDate, setSelectedDate] = useState(moment().date());
     function changeSelectedDate(date) {
+        if(date)
         setSelectedDate(date)
     }
 
     function output() {
         setViewType(false);
-        props.conditions(now.year(),now.month(),selectedDate,selector)
+        props.output(now.year(),now.month(),selectedDate,selector)
     }
 
     // Задание первого и последнего дней
@@ -108,8 +109,9 @@ function Calendar(props){
             dayNames[i][j] = {value:""};
         }
     }
-    return <div>
+    return <div className={css.element}>
         <div className={css.header}>
+            <span className={css.label}>{props.label}</span>
             <input type="button" value="<<" onClick={()=>{
                 subNow("Y")
             }}/>
@@ -129,20 +131,23 @@ function Calendar(props){
         <table>
             <thead>
             <tr>
-                {weekStr.map((el)=>
-                    <th>{el}</th>
+                {weekStr.map((el,i)=>
+                    <th key={i}>{el}</th>
                 )}
             </tr>
             </thead>
             <tbody className={selector === "M" || selector === "Y"? `${css.selected} ${css.targeted}`: "" }>
-        {dayNames.map(el =>
+        {dayNames.map((el,i) =>
             <tr
                 className={`${el.selected? css.selected: ""} ${selector === "w"? css.targeted:""}`}
+                key={i}
             >{
-                el.map(val=>
+                el.map((val,j)=>
                     <td
                         className={`${val.selected? css.selected: ""} ${selector === "d"? css.targeted:""}`}
-                        onClick={()=>{changeSelectedDate(val.value)}}>{val.value}</td>
+                        onClick={()=>{changeSelectedDate(val.value)}}
+                        key={j}
+                    >{val.value}</td>
                 )
             }</tr>
         )}</tbody>

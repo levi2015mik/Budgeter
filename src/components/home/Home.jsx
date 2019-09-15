@@ -9,15 +9,13 @@ function Home(props) {
         props.changeTextField(ev.target.value)
     }
     const entries = props.entries;
-
-
     return(
         <div className={css.home}>
             <div className={css.dateSelect}>
-                <Calendar locale="ru" conditions={()=>{}}/>
                 <input value={props.textFieldValue} type="text" onChange={changeField} placeholder="Name of entry" />
                 <input value="Add new entry" type="button" onClick={props.addNewEntry}/>
             </div>
+            <div>
                 <input value="Accept selected" type="button" onClick={props.acceptSelected}/>
                 <input value="Delete selected" type="button" onClick={props.deleteSelected}/>
 
@@ -31,9 +29,14 @@ function Home(props) {
                     type="button"
                     onClick={()=>{props.changeSelectedAll(false)}}/>
 
+                <Calendar locale="ru" label="Filter" output={()=>{}}/>
+
                 <hr/>
+            </div>
+            <div>
             {entries.map(el=>
                 <Entry
+                       key={el.id}
                        name={el.name}
                        id={el.id}
                        accepted={el.accepted}
@@ -43,6 +46,7 @@ function Home(props) {
                        del={props.deleteEntrie}
                 />
             )}
+            </div>
         </div>
     )
 }
