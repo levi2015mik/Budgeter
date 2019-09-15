@@ -10,13 +10,14 @@ const DEFAULT_STATE = {
         {name:"Набор юный террорист из супермаркета", id:3, accepted:false, activated:122324354},
         {name:"Шакшука с кофе", id:4, accepted:false, activated:122324354}
     ],
-
+    nextTaskId: 5
 };
 
 function TasksCcountsReducer(state = DEFAULT_STATE, action) {
     switch (action.type){
         case ADD_TASK:
-            return {...state,tasks:[...state.tasks,action.newTask]};
+            let tasksArr = [...state.tasks,action.newTask];
+            return {...state,tasks:tasksArr,nextTaskId:tasksArr.length};
         case DEL_TASK:
             return {...state,tasks:state.tasks.filter((el)=> el.id !== action.id)};
         default: return state;

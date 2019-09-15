@@ -82,12 +82,12 @@ function HomeReducer(state = DEFAULT_STATE,action) {
     }
 }
 
-// Action creaters
+// Action creators
 const changeTextField =(value)=>({type:CHANGE_ENTER_FIELD,value: value});
-const addNewEntry = () =>({type:ADD_NEW_ENTRY});
+const addNewEntry = () => ({type:ADD_NEW_ENTRY});
 const acceptElement = (id) =>({type:ACCEPT,value:id});
 const acceptSelected = () => ({type:ACCEPT});
-const deleteEntrie = (id) => ({type:DELETE,value:id});
+const deleteEntry = (id) => ({type:DELETE,value:id});
 const deleteSelected =() => ({type:DELETE});
 const changeElSelection = (id) => ({type:CHANGE_SELECTION,value:id});
 const changeSelectedAll = (sign) => ({type:CHANGE_SELECTION_ALL,value:sign});
@@ -98,7 +98,7 @@ export {
     addNewEntry,
     acceptElement,
     acceptSelected,
-    deleteEntrie,
+    deleteEntry,
     deleteSelected,
     changeElSelection,
     changeSelectedAll,

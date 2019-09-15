@@ -1,7 +1,7 @@
 import Home from "./Home"
 import {connect} from "react-redux";
 import * as importedData from "../../redux/HomeReducer"
-
+import actor from "../../redux/actor"
 /*
 * Контейнер для передачи State в Home
 * */
@@ -14,10 +14,10 @@ function mapStateToProps(state){
 }
 const mapDispatchToProps = {
     changeTextField:importedData.changeTextField,
-    addNewEntry:importedData.addNewEntry,
+    addNewEntry:actor.addTask,
     acceptElement:importedData.acceptElement,
     acceptSelected:importedData.acceptSelected,
-    deleteEntrie:importedData.deleteEntrie,
+    deleteEntrie:actor.delTask,
     deleteSelected:importedData.deleteSelected,
     changeElSelection:importedData.changeElSelection,
     changeSelectedAll:importedData.changeSelectedAll

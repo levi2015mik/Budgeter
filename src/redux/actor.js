@@ -1,5 +1,5 @@
-import HomeReducer from "./HomeReducer"
-import TasksCcountsReducer from "./Tasks&ccountsReducer"
+import * as HomeReducer from "./HomeReducer"
+import * as TasksCcountsReducer from "./Tasks&ccountsReducer"
 /**
  * Этот фацйл содержит функции, манипулирующие данными store
  * - Создание ногого таска и его запись в две ветки store.
@@ -8,7 +8,9 @@ import TasksCcountsReducer from "./Tasks&ccountsReducer"
  **/
 
 function addTask() {
-    return (dispatch, getState) =>{}
+    return (dispatch, getState) =>{
+        dispatch(HomeReducer.addNewEntry())
+    }
 }
 
 function tasksFilter(){
@@ -16,10 +18,12 @@ function tasksFilter(){
 }
 
 function delTask(id) {
-    return (dispatch, getState) =>{}
+    return (dispatch, getState) =>{
+        dispatch(HomeReducer.deleteEntry(id))
+    }
 }
 
-export {
+export default {
     addTask,
     tasksFilter,
     delTask
