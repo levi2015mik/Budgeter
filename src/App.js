@@ -6,7 +6,7 @@ import List from "./components/List";
 import Help from "./components/Help";
 import { HashRouter, Route} from "react-router-dom";
 import css from './app.module.css';
-import store from './redux/store'
+import store from './redux/mystore'
 
 function App() {
     window.store=store;

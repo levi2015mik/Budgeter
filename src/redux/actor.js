@@ -1,3 +1,5 @@
+import HomeReducer from "./HomeReducer"
+import TasksCcountsReducer from "./Tasks&ccountsReducer"
 /**
  * Этот фацйл содержит функции, манипулирующие данными store
  * - Создание ногого таска и его запись в две ветки store.
@@ -5,16 +7,16 @@
  * - Удаление ненужного таска из обеих веток
  **/
 
-function addTask(dispatch) {
-    //
+function addTask() {
+    return (dispatch, getState) =>{}
 }
 
-function tasksFilter(dispatch){
-    //
+function tasksFilter(){
+    return (dispatch, getState) =>{}
 }
 
-function delTask(dispatch,id) {
-    //
+function delTask(id) {
+    return (dispatch, getState) =>{}
 }
 
 export {

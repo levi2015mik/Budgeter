@@ -13,7 +13,7 @@ const DEFAULT_STATE = {
 
 };
 
-function TasksAccountsReducer(state = DEFAULT_STATE, action) {
+function TasksCcountsReducer(state = DEFAULT_STATE, action) {
     switch (action.type){
         case ADD_TASK:
             return {...state,tasks:[...state.tasks,action.newTask]};
@@ -23,4 +23,4 @@ function TasksAccountsReducer(state = DEFAULT_STATE, action) {
     }
 }
 
-export default TasksAccountsReducer;
+export default TasksCcountsReducer;
