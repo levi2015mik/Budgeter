@@ -15,13 +15,20 @@
 }
 .cal table{
     display: inline-block;
-    margin-bottom: 0.5em;
+    margin-bottom: 0;
+}
+td:empty{
+    background: #fff !important;
+}
+tbody td{
+    font-size: 1.2em;
 }
 .selector{
     margin-top: 0.2em;
-    margin-left: 0.5em;
+    margin-left: 1em;
     display: inline-block;
     vertical-align: top;
+    font-size: 1.2em;
 }
 .selector h3{
     margin-top: 0;

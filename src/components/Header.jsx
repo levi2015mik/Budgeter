@@ -4,7 +4,7 @@ import { NavLink} from "react-router-dom";
 function Header(props) {
     return(
         <header className={css.header}>
-            Menu
+            Personal accounting application
             <ul>
                 <li><NavLink to="/" >Home</NavLink></li>
                 <li><NavLink to="/list" >List</NavLink></li>

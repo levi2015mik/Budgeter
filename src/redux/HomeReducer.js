@@ -1,6 +1,5 @@
 const ADD_NEW_ENTRY = "ADD_NEW_ENTRY";
 const CHANGE_ENTER_FIELD = "CHANGE_ENTER_FIELD";
-const FILTER_OUTPUT = "FILTER_OUTPUT";
 const DELETE = "DELETE";
 const ACCEPT = "ACCEPT";
 const CHANGE_SELECTION = "CHANGE_SELECTION";
@@ -27,16 +26,11 @@ function HomeReducer(state = DEFAULT_STATE,action) {
         case ADD_NEW_ENTRY:
             let maxId = state.filteredEntries.length;
             let newEntry = {name:state.newEntryName,id: maxId};
-            let stateCp = {
+            return {
                 ...state,
-                filteredEntries:[...state.filteredEntries,newEntry],
-                newEntryName:""
+                filteredEntries: [...state.filteredEntries, newEntry],
+                newEntryName: ""
             };
-            stateCp.maxId ++;
-            return stateCp;
-
-        case FILTER_OUTPUT:
-            return state;
 
         case DELETE:
             if(action.value){
@@ -87,13 +81,26 @@ function HomeReducer(state = DEFAULT_STATE,action) {
         default: return state;
     }
 }
+
+// Action creaters
+const changeTextField =(value)=>({type:CHANGE_ENTER_FIELD,value: value});
+const addNewEntry = () =>({type:ADD_NEW_ENTRY});
+const acceptElement = (id) =>({type:ACCEPT,value:id});
+const acceptSelected = () => ({type:ACCEPT});
+const deleteEntrie = (id) => ({type:DELETE,value:id});
+const deleteSelected =() => ({type:DELETE});
+const changeElSelection = (id) => ({type:CHANGE_SELECTION,value:id});
+const changeSelectedAll = (sign) => ({type:CHANGE_SELECTION_ALL,value:sign});
+
+
 export {
-    ADD_NEW_ENTRY,
-    CHANGE_ENTER_FIELD,
-    FILTER_OUTPUT,
-    DELETE,
-    ACCEPT,
-    CHANGE_SELECTION,
-    CHANGE_SELECTION_ALL
+    changeTextField,
+    addNewEntry,
+    acceptElement,
+    acceptSelected,
+    deleteEntrie,
+    deleteSelected,
+    changeElSelection,
+    changeSelectedAll,
 }
 export default HomeReducer

@@ -5,17 +5,10 @@ import Calendar from "../Calendar/Calendar";
 
 
 function Home(props) {
-    function addNewEntry(ev) {
-        console.log(ev);
-    }
-
     function changeField(ev) {
         props.changeTextField(ev.target.value)
     }
     const entries = props.entries;
-
-    // TODO Transform DataSelect to separated element
-    const day = new Date().toLocaleDateString();
 
 
     return(

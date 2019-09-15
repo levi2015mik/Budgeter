@@ -154,6 +154,7 @@ function Calendar(props){
             <label><input type="radio" value={"d"} name="selector" onChange={selectorChange} checked={selector === "d"} />Day</label>
         </div>
         <div>
+            <input type="button" value="Reset" onClick={()=>setViewType(false)}/>
             <input type="button" value="Now" onClick={today}/>
             <input type="button" value="OK" onClick={output}/>
         </div>

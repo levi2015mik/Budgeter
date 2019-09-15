@@ -1,6 +1,6 @@
 import Home from "./Home"
 import {connect} from "react-redux";
-import * as d from "../../redux/HomeReducer"
+import * as importedData from "../../redux/HomeReducer"
 
 /*
 * Контейнер для передачи State в Home
@@ -12,30 +12,14 @@ function mapStateToProps(state){
         textFieldValue: state.HomeReducer.newEntryName
     }
 }
-const mapDispatchToProps = (dispatch) => ({
-    changeTextField(value){
-        dispatch({type:d.CHANGE_ENTER_FIELD,value:value})
-    },
-    addNewEntry(){
-        dispatch({type:d.ADD_NEW_ENTRY})
-    },
-    acceptElement(id){
-        dispatch({type:d.ACCEPT,value:id})
-    },
-    acceptSelected(){
-        dispatch({type:d.ACCEPT})
-    },
-    deleteEntrie(id){
-        dispatch({type:d.DELETE,value:id})
-    },
-    deleteSelected(){
-        dispatch({type:d.DELETE})
-    },
-    changeElSelection(id){
-        dispatch({type:d.CHANGE_SELECTION,value:id})
-    },
-    changeSelectedAll(sign){
-        dispatch({type:d.CHANGE_SELECTION_ALL,value:sign})
-    }
-});
+const mapDispatchToProps = {
+    changeTextField:importedData.changeTextField,
+    addNewEntry:importedData.addNewEntry,
+    acceptElement:importedData.acceptElement,
+    acceptSelected:importedData.acceptSelected,
+    deleteEntrie:importedData.deleteEntrie,
+    deleteSelected:importedData.deleteSelected,
+    changeElSelection:importedData.changeElSelection,
+    changeSelectedAll:importedData.changeSelectedAll
+};
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
