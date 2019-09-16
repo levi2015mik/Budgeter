@@ -1,6 +1,6 @@
 
 const ADD_TASK = "ADD_TASK";
-const DEL_TASK = "DEL_TASK";
+const DELETE = "DELETE";
 
 const DEFAULT_STATE = {
     tasks:[
@@ -18,10 +18,25 @@ function TasksCcountsReducer(state = DEFAULT_STATE, action) {
         case ADD_TASK:
             let tasksArr = [...state.tasks,action.newTask];
             return {...state,tasks:tasksArr,nextTaskId:tasksArr.length};
-        case DEL_TASK:
+        case DELETE:
             return {...state,tasks:state.tasks.filter((el)=> el.id !== action.id)};
+
         default: return state;
     }
 }
 
+// actions
+const addNewTask = (newTask) => ({
+    type: ADD_TASK,
+    newTask:newTask
+});
+
+const delTask = (id) => ({
+    type:DELETE,
+    id:id
+});
+export {
+    addNewTask,
+    delTask
+}
 export default TasksCcountsReducer;

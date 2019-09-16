@@ -1,10 +1,14 @@
-import React from "react";
+import React, {useEffect} from "react";
 import css from "./home.module.css"
 import Entry from "./Entry"
 import Calendar from "../Calendar/Calendar";
 
 
 function Home(props) {
+
+    // Запуск фильтрации для вывода данных. Запускается только один раз
+    useEffect(props.activateDataFilter,[]);
+
     function changeField(ev) {
         props.changeTextField(ev.target.value)
     }
@@ -29,7 +33,7 @@ function Home(props) {
                     type="button"
                     onClick={()=>{props.changeSelectedAll(false)}}/>
 
-                <Calendar locale="ru" label="Filter" output={()=>{}}/>
+                <Calendar locale="ru" label="Filter" output={props.activateDataFilter}/>
 
                 <hr/>
             </div>

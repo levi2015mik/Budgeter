@@ -4,6 +4,7 @@ const DELETE = "DELETE";
 const ACCEPT = "ACCEPT";
 const CHANGE_SELECTION = "CHANGE_SELECTION";
 const CHANGE_SELECTION_ALL = "CHANGE_SELECTION_ALL";
+const REFRASH_ALL = "REFRASH_ALL";
 
 
 const DEFAULT_STATE = {
@@ -14,22 +15,27 @@ const DEFAULT_STATE = {
         {name:"Набор юный террорист из супермаркета", id:3, accepted:false, selected: false},
         {name:"Шакшука с кофе", id:4, accepted:false, selected: false},
     ],
+    nextTaskId:5,
     newEntryName:"",
+    activateTaskTime:1568648224761
 };
 function HomeReducer(state = DEFAULT_STATE,action) {
 
     switch (action.type){
 
+        case REFRASH_ALL:
+            return { ...state,filteredEntries: action.tasks};
         case CHANGE_ENTER_FIELD:
             return { ...state,newEntryName: action.value };
 
         case ADD_NEW_ENTRY:
-            let maxId = state.filteredEntries.length;
-            let newEntry = {name:state.newEntryName,id: maxId};
+            let newEntry = action.newTask;
+            let nextId = state.nextTaskId +=1;
             return {
                 ...state,
                 filteredEntries: [...state.filteredEntries, newEntry],
-                newEntryName: ""
+                newEntryName: "",
+                nextTaskId: nextId
             };
 
         case DELETE:
@@ -84,13 +90,14 @@ function HomeReducer(state = DEFAULT_STATE,action) {
 
 // Action creators
 const changeTextField =(value)=>({type:CHANGE_ENTER_FIELD,value: value});
-const addNewEntry = () => ({type:ADD_NEW_ENTRY});
+const addNewEntry = (newTask) => ({type:ADD_NEW_ENTRY,newTask:newTask});
 const acceptElement = (id) =>({type:ACCEPT,value:id});
 const acceptSelected = () => ({type:ACCEPT});
 const deleteEntry = (id) => ({type:DELETE,value:id});
 const deleteSelected =() => ({type:DELETE});
 const changeElSelection = (id) => ({type:CHANGE_SELECTION,value:id});
 const changeSelectedAll = (sign) => ({type:CHANGE_SELECTION_ALL,value:sign});
+const refrashEntrys = (tasks) => ({type:REFRASH_ALL,tasks:tasks});
 
 
 export {
@@ -102,5 +109,6 @@ export {
     deleteSelected,
     changeElSelection,
     changeSelectedAll,
+    refrashEntrys
 }
 export default HomeReducer

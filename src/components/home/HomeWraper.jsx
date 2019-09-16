@@ -15,10 +15,11 @@ function mapStateToProps(state){
 const mapDispatchToProps = {
     changeTextField:importedData.changeTextField,
     addNewEntry:actor.addTask,
+    activateDataFilter:actor.tasksFilter,
     acceptElement:importedData.acceptElement,
     acceptSelected:importedData.acceptSelected,
     deleteEntrie:actor.delTask,
-    deleteSelected:importedData.deleteSelected,
+    deleteSelected:actor.delTask,
     changeElSelection:importedData.changeElSelection,
     changeSelectedAll:importedData.changeSelectedAll
 };
