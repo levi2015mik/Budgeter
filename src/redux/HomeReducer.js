@@ -17,6 +17,7 @@ const DEFAULT_STATE = {
     ],
     nextTaskId:5,
     newEntryName:"",
+    // TODO form of enter activateTime in Home component + action
     activateTaskTime:1568648224761
 };
 function HomeReducer(state = DEFAULT_STATE,action) {

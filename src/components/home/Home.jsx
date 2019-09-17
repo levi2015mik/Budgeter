@@ -2,6 +2,7 @@ import React, {useEffect} from "react";
 import css from "./home.module.css"
 import Entry from "./Entry"
 import Calendar from "../Calendar/Calendar";
+import SmallCalendar from "../Calendar/SmallCalendar";
 
 
 function Home(props) {
@@ -17,6 +18,11 @@ function Home(props) {
         <div className={css.home}>
             <div className={css.dateSelect}>
                 <input value={props.textFieldValue} type="text" onChange={changeField} placeholder="Name of entry" />
+                <SmallCalendar
+                    locale={"ru"}
+                    label={"Enter date to activate task"}
+                    output={()=>{}}
+                />
                 <input value="Add new entry" type="button" onClick={props.addNewEntry}/>
             </div>
             <div>
