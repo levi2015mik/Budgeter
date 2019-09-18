@@ -21,6 +21,7 @@ const mapDispatchToProps = {
     deleteEntrie:actor.delTask,
     deleteSelected:actor.delTask,
     changeElSelection:importedData.changeElSelection,
-    changeSelectedAll:importedData.changeSelectedAll
+    changeSelectedAll:importedData.changeSelectedAll,
+    changeActivateTime:importedData.changeActivateTime,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

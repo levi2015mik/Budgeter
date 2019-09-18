@@ -29,7 +29,7 @@ function addTask() {
 }
 
 // Фильтрация данных, выводимых пользователю
-function tasksFilter(){
+function tasksFilter(conditions){
     return (dispatch, getState) =>{
         let insertedData = getState().TasksAccoountsReducer.tasks;
         //TODO Add filter with date

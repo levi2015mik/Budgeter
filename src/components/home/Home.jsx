@@ -6,7 +6,6 @@ import SmallCalendar from "../Calendar/SmallCalendar";
 
 
 function Home(props) {
-
     // Запуск фильтрации для вывода данных. Запускается только один раз
     useEffect(props.activateDataFilter,[]);
 
@@ -21,7 +20,7 @@ function Home(props) {
                 <SmallCalendar
                     locale={"ru"}
                     label={"Enter date to activate task"}
-                    output={()=>{}}
+                    output={props.changeActivateTime}
                 />
                 <input value="Add new entry" type="button" onClick={props.addNewEntry}/>
             </div>

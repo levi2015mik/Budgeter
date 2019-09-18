@@ -4,8 +4,8 @@ const DELETE = "DELETE";
 const ACCEPT = "ACCEPT";
 const CHANGE_SELECTION = "CHANGE_SELECTION";
 const CHANGE_SELECTION_ALL = "CHANGE_SELECTION_ALL";
-const REFRASH_ALL = "REFRASH_ALL";
-
+const REFRESH_ALL = "REFRESH_ALL";
+const CHANGE_TASK_ACTIVATE_TIME = "CHANGE_TASK_ACTIVATE_TIME";
 
 const DEFAULT_STATE = {
     filteredEntries:[
@@ -15,19 +15,22 @@ const DEFAULT_STATE = {
         {name:"Набор юный террорист из супермаркета", id:3, accepted:false, selected: false},
         {name:"Шакшука с кофе", id:4, accepted:false, selected: false},
     ],
+
     nextTaskId:5,
     newEntryName:"",
-    // TODO form of enter activateTime in Home component + action
-    activateTaskTime:1568648224761
+    activateTaskTime:1568648224761,
+    filter:{}
 };
 function HomeReducer(state = DEFAULT_STATE,action) {
 
     switch (action.type){
 
-        case REFRASH_ALL:
+        case REFRESH_ALL:
             return { ...state,filteredEntries: action.tasks};
         case CHANGE_ENTER_FIELD:
             return { ...state,newEntryName: action.value };
+        case CHANGE_TASK_ACTIVATE_TIME:
+            return { ...state, activateTaskTime: action.time};
 
         case ADD_NEW_ENTRY:
             let newEntry = action.newTask;
@@ -91,6 +94,7 @@ function HomeReducer(state = DEFAULT_STATE,action) {
 
 // Action creators
 const changeTextField =(value)=>({type:CHANGE_ENTER_FIELD,value: value});
+const changeActivateTime = (time) =>({type:CHANGE_TASK_ACTIVATE_TIME,time:time});
 const addNewEntry = (newTask) => ({type:ADD_NEW_ENTRY,newTask:newTask});
 const acceptElement = (id) =>({type:ACCEPT,value:id});
 const acceptSelected = () => ({type:ACCEPT});
@@ -98,12 +102,13 @@ const deleteEntry = (id) => ({type:DELETE,value:id});
 const deleteSelected =() => ({type:DELETE});
 const changeElSelection = (id) => ({type:CHANGE_SELECTION,value:id});
 const changeSelectedAll = (sign) => ({type:CHANGE_SELECTION_ALL,value:sign});
-const refrashEntrys = (tasks) => ({type:REFRASH_ALL,tasks:tasks});
+const refrashEntrys = (tasks) => ({type:REFRESH_ALL,tasks:tasks});
 
 
 export {
     changeTextField,
     addNewEntry,
+    changeActivateTime,
     acceptElement,
     acceptSelected,
     deleteEntry,

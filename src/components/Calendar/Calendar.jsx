@@ -60,8 +60,7 @@ function Calendar(props){
 
     function output() {
         setViewType(false);
-        console.log(now.year(),now.month(),selectedDate,selector);
-        props.output(now.year(),now.month(),selectedDate,selector)
+        props.output({year:now.year(),month:now.month(),date:selectedDate,selector:selector})
     }
 
     // Задание первого и последнего дней

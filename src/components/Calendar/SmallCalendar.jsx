@@ -56,7 +56,6 @@ function SmallCalendar(props) {
         date.year(now.year());
         date.month(now.month());
         date.date(selectedDate);
-        console.log(date.valueOf());
         props.output(date.valueOf());
     }
     // Задание первого и последнего дней
@@ -68,6 +67,7 @@ function SmallCalendar(props) {
             <span className={css.label}>{props.label}</span>
             <div style={{display:"inline-block"}}>
             <Selector
+                day={selectedDate}
                 showYear={false}
                 toggleEl={toggleEl}
                 subNow={subNow}
