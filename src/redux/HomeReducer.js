@@ -16,7 +16,6 @@ const DEFAULT_STATE = {
         {name:"Шакшука с кофе", id:4, accepted:false, selected: false},
     ],
 
-    nextTaskId:5,
     newEntryName:"",
     activateTaskTime:1568648224761,
     filter:{}
@@ -33,13 +32,9 @@ function HomeReducer(state = DEFAULT_STATE,action) {
             return { ...state, activateTaskTime: action.time};
 
         case ADD_NEW_ENTRY:
-            let newEntry = action.newTask;
-            let nextId = state.nextTaskId +=1;
             return {
                 ...state,
-                filteredEntries: [...state.filteredEntries, newEntry],
                 newEntryName: "",
-                nextTaskId: nextId
             };
 
         case DELETE:

@@ -15,7 +15,7 @@ function addTask() {
     return (dispatch, getState) =>{
         let state = getState();
         let activateTaskTime = state.HomeReducer.activateTaskTime;
-        let nextTaskId = state.HomeReducer.nextTaskId;
+        let nextTaskId = state.TasksAccoountsReducer.tasks.length;
         let newEntryName = state.HomeReducer.newEntryName;
         let newTask = {
             name:newEntryName,
@@ -24,6 +24,7 @@ function addTask() {
             activateTaskTime: activateTaskTime
         };
         dispatch(TasksCcountsReducer.addNewTask(newTask));
+        dispatch(HomeReducer.addNewEntry());
         dispatch(tasksFilter());
     }
 }
