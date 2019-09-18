@@ -4,16 +4,16 @@ const DELETE = "DELETE";
 
 const DEFAULT_STATE = {
     tasks:[
-        {name:"Торт с марципаном", id:0, accepted:false, activated:122324354},
-        {name:"Укроп", id:1, accepted:false, activated:122324354},
-        {name:"Горчица", id:2, accepted:false, activated:122324354},
-        {name:"Набор юный террорист из супермаркета", id:3, accepted:false, activated:122324354},
-        {name:"Шакшука с кофе", id:4, accepted:false, activated:122324354}
+        {name:"Торт с марципаном", id:0, accepted:false, activated:1568581200000},
+        {name:"Укроп", id:1, accepted:false, activated:1568581200640},
+        {name:"Горчица", id:2, accepted:false, activated:1568667600000},
+        {name:"Набор юный террорист из супермаркета", id:3, accepted:false, activated:1568667600500},
+        {name:"Шакшука с кофе", id:4, accepted:false, activated:1568667600720}
     ],
     nextTaskId: 5
 };
 
-function TasksCcountsReducer(state = DEFAULT_STATE, action) {
+function TasksAccountsReducer(state = DEFAULT_STATE, action) {
     switch (action.type){
         case ADD_TASK:
             let tasksArr = [...state.tasks,action.newTask];
@@ -39,4 +39,4 @@ export {
     addNewTask,
     delTask
 }
-export default TasksCcountsReducer;
+export default TasksAccountsReducer;

@@ -1,5 +1,6 @@
 import * as HomeReducer from "./HomeReducer"
-import * as TasksCcountsReducer from "./Tasks&ccountsReducer"
+import * as TasksCcountsReducer from "./TasksAccountsReducer"
+import moment from "moment";
 /**
  * Этот фацйл содержит функции, манипулирующие данными store
  * - Создание ногого таска и его запись в две ветки store.
@@ -31,11 +32,34 @@ function addTask() {
 
 // Фильтрация данных, выводимых пользователю
 function tasksFilter(conditions){
+    if(typeof conditions ===  "undefined"){
+        let now = moment();
+        conditions = {
+            year: now.year(),
+            month:now.month(),
+            date:now.date(),
+            selector:"d"
+        };
+    }
+
+    let filterTime = moment({
+        year:conditions.year,
+        month:conditions.month,
+        date:conditions.date
+    });
+
     return (dispatch, getState) =>{
         let insertedData = getState().TasksAccoountsReducer.tasks;
-        //TODO Add filter with date
+
+        insertedData = insertedData.filter(el =>{
+            let time = moment(el.activated);
+            return time.isSame(filterTime,conditions.selector)
+        });
+
         insertedData = insertedData.map((el) => ({...el,selected:false}));
-        dispatch(HomeReducer.refrashEntrys(insertedData))
+
+        dispatch(HomeReducer.refreshEntries(insertedData));
+        dispatch(HomeReducer.changeFilter(conditions));
     }
 }
 

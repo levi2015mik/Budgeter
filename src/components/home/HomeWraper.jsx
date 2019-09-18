@@ -9,7 +9,9 @@ import actor from "../../redux/actor"
 function mapStateToProps(state){
     return {
         entries: state.HomeReducer.filteredEntries,
-        textFieldValue: state.HomeReducer.newEntryName
+        textFieldValue: state.HomeReducer.newEntryName,
+        filter:state.HomeReducer.filter,
+        activateTaskTime:state.HomeReducer.activateTaskTime
     }
 }
 const mapDispatchToProps = {

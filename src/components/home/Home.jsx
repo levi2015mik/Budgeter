@@ -21,6 +21,7 @@ function Home(props) {
                     locale={"ru"}
                     label={"Enter date to activate task"}
                     output={props.changeActivateTime}
+                    value={props.activateTaskTime}
                 />
                 <input value="Add new entry" type="button" onClick={props.addNewEntry}/>
             </div>
@@ -38,7 +39,12 @@ function Home(props) {
                     type="button"
                     onClick={()=>{props.changeSelectedAll(false)}}/>
 
-                <Calendar locale="ru" label="Filter" output={props.activateDataFilter}/>
+                <Calendar
+                    locale="ru"
+                    label="Filter"
+                    value={props.filter}
+                    output={props.activateDataFilter}
+                />
 
                 <hr/>
             </div>

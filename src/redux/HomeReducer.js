@@ -6,16 +6,10 @@ const CHANGE_SELECTION = "CHANGE_SELECTION";
 const CHANGE_SELECTION_ALL = "CHANGE_SELECTION_ALL";
 const REFRESH_ALL = "REFRESH_ALL";
 const CHANGE_TASK_ACTIVATE_TIME = "CHANGE_TASK_ACTIVATE_TIME";
+const CHANGE_FILTER = "CHANGE_FILTER";
 
 const DEFAULT_STATE = {
-    filteredEntries:[
-        {name:"Торт с марципаном", id:0, accepted:true, selected: false},
-        {name:"Укроп", id:1, accepted:false, selected: false},
-        {name:"Горчица", id:2, accepted:false, selected: false},
-        {name:"Набор юный террорист из супермаркета", id:3, accepted:false, selected: false},
-        {name:"Шакшука с кофе", id:4, accepted:false, selected: false},
-    ],
-
+    filteredEntries:[],
     newEntryName:"",
     activateTaskTime:1568648224761,
     filter:{}
@@ -30,13 +24,13 @@ function HomeReducer(state = DEFAULT_STATE,action) {
             return { ...state,newEntryName: action.value };
         case CHANGE_TASK_ACTIVATE_TIME:
             return { ...state, activateTaskTime: action.time};
-
+        case CHANGE_FILTER:
+            return { ...state, filter:action.filter};
         case ADD_NEW_ENTRY:
             return {
                 ...state,
                 newEntryName: "",
             };
-
         case DELETE:
             if(action.value){
                 let entries = state.filteredEntries.filter((el) => el.id !== action.value);
@@ -94,10 +88,10 @@ const addNewEntry = (newTask) => ({type:ADD_NEW_ENTRY,newTask:newTask});
 const acceptElement = (id) =>({type:ACCEPT,value:id});
 const acceptSelected = () => ({type:ACCEPT});
 const deleteEntry = (id) => ({type:DELETE,value:id});
-const deleteSelected =() => ({type:DELETE});
 const changeElSelection = (id) => ({type:CHANGE_SELECTION,value:id});
 const changeSelectedAll = (sign) => ({type:CHANGE_SELECTION_ALL,value:sign});
-const refrashEntrys = (tasks) => ({type:REFRESH_ALL,tasks:tasks});
+const refreshEntries = (tasks) => ({type:REFRESH_ALL,tasks:tasks});
+const changeFilter = (filter) => ({type:CHANGE_FILTER,filter:filter});
 
 
 export {
@@ -107,9 +101,9 @@ export {
     acceptElement,
     acceptSelected,
     deleteEntry,
-    deleteSelected,
     changeElSelection,
     changeSelectedAll,
-    refrashEntrys
+    refreshEntries,
+    changeFilter
 }
 export default HomeReducer

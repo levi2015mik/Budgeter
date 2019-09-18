@@ -5,8 +5,7 @@ import moment from "moment"
 /**
  * Календарь на один месяц, представленный в виде таблицы.
  * Компонент практически полностью управляем извне и не имеет представления о текущей дате
- * TODO Добавить поддержку написания справа налево для иврита
- * TODO Добавить праздники с локализацией
+ * TODO Добавить выходные с локализацией
  * @param {Object} props {
  *  {string} locale (ru, en, he ...)
  *  {number} startMonth Первый день недели для месяца в парадигме javascript (начиная от нуля)
@@ -35,6 +34,9 @@ function MainTable(props) {
         if(startMonth === 0) startMonth = 6;
         else startMonth = startMonth - 1
     }
+    // Ивритская корректировка
+    let styleDirection = {};
+    if(props.locale === "he") styleDirection = {direction:"rtl"};
 
     for(let i = 0;i < 7;i ++){
         weekStr[i] = week[i + weekCorrector];
@@ -69,7 +71,7 @@ function MainTable(props) {
 
 
     return<>
-        <table>
+        <table style={styleDirection}>
             <thead>
             <tr>
                 {weekStr.map((el,i)=>

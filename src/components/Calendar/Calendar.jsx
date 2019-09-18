@@ -9,6 +9,7 @@ import MainTable from "./MainTable";
 /**
  * Календарь - компонент выбора дня - недели - месяца - года, имеющий собственное состояние
  * Умеет рпботать с русским форматом
+ * TODO Сделать компонент управляемым (через state.HomeReducer)
  * @param {Object} props {
  *  {string} locale
  *  {string) label
