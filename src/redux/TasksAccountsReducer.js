@@ -1,6 +1,7 @@
-
 const ADD_TASK = "ADD_TASK";
 const DELETE = "DELETE";
+const ADD_EMPTY_ACCOUNT = "ADD_EMPTY_ACCOUNT";
+const SUBMIT_ACCOUNT = "SUBMIT_ACCOUNT";
 
 const DEFAULT_STATE = {
     tasks:[
@@ -10,6 +11,8 @@ const DEFAULT_STATE = {
         {name:"Набор юный террорист из супермаркета", id:3, accepted:false, activated:1568667600500},
         {name:"Шакшука с кофе", id:4, accepted:false, activated:1568667600720}
     ],
+    accounts:[],
+    newAccountId:0,
     nextTaskId: 5
 };
 
@@ -21,6 +24,32 @@ function TasksAccountsReducer(state = DEFAULT_STATE, action) {
         case DELETE:
             return {...state,tasks:state.tasks.filter((el)=> el.id !== action.id)};
 
+        case ADD_EMPTY_ACCOUNT:
+            /*
+                Сложный элемент, требует проверки
+            */
+
+            let accountId = state.accounts.length; // Определяем идентификатор будущего счета -- Возможно потом станет зависимо от бэкенда
+            let newAccount = {tasks:action.tasks, id:accountId, accepted:false}; // Создаем объект нового счета со ссылками на таски
+            let newTasks = state.tasks.map((el)=>{ // Вносим ссылку в таски
+                let isChanged = action.tasks.some((num)=>num === el.id); // Проверяем, входит ли таск в число выбранных
+                if(isChanged) el.account = accountId; // Если входит - заносим идентификатор
+                return el;
+            });
+            return {
+                ...state,
+                accounts:[ ...state.accounts,newAccount],
+                tasks:newTasks,
+                newAccountId: accountId
+            }; // Композиция всех данных - счетов и тасков
+
+        case SUBMIT_ACCOUNT:
+            let result = { ...state,accounts:[ ...state.accounts]};
+            result.accounts[action.id] = {
+                ...result.accounts[action.id],
+                ...action.content,
+                accepted:true};
+            return result;
         default: return state;
     }
 }
@@ -35,8 +64,26 @@ const delTask = (id) => ({
     type:DELETE,
     id:id
 });
+
+/**
+ * Создание нового счета с привязкой к таскам
+ * @param {Array} tasks Перечень идентификаторов тасков
+ * @returns {{type: string, tasks: *}}
+ */
+const addNewAccount = (tasks) => ({type:ADD_EMPTY_ACCOUNT,tasks:tasks});
+
+/**
+ * Внесение в счет данных
+ * @param {Number} id Идентификатор аккаунта
+ * @param {Object} data Набор параметров счета
+ * @returns {{type: string, id: *, content: *}}
+ * @constructor
+ */
+const SubmitAccount = (id, data) =>({type: SUBMIT_ACCOUNT,id:id,content:data});
 export {
     addNewTask,
-    delTask
+    delTask,
+    addNewAccount,
+    SubmitAccount
 }
 export default TasksAccountsReducer;

@@ -85,8 +85,8 @@ function delTask(id) {
 }
 
 function preAcceptElement(id) {
-    return (dispatch, getState)=>{
-        alert(0)
+    return (dispatch)=>{
+        dispatch(TasksCcountsReducer.addNewAccount([id]));
     }
 }
 

@@ -17,7 +17,7 @@ function Home(props) {
 
     function preAcceptEl(id) {
         props.preAcceptElement(id);
-        setRedirect({go:true})
+        setRedirect({go:true,to:"/account"})
     }
     function preAcceptSelected() {
 
@@ -27,7 +27,7 @@ function Home(props) {
     const entries = props.entries;
     return(
         <div className={css.home}>
-            {redirect.go && <Redirect to={"/account/2"}/>}
+            {redirect.go && <Redirect to={redirect.to}/>}
             <div className={css.dateSelect}>
                 <input value={props.textFieldValue} type="text" onChange={changeField} placeholder="Name of entry" />
                 <SmallCalendar

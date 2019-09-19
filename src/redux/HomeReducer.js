@@ -11,7 +11,7 @@ const DEFAULT_STATE = {
     filteredEntries:[],
     newEntryName:"",
     activateTaskTime:1568648224761,
-    filter:{}
+    filter:{},
 };
 function HomeReducer(state = DEFAULT_STATE,action) {
 
@@ -70,7 +70,6 @@ const changeSelectedAll = (sign) => ({type:CHANGE_SELECTION_ALL,value:sign});
 const refreshEntries = (tasks) => ({type:REFRESH_ALL,tasks:tasks});
 const changeFilter = (filter) => ({type:CHANGE_FILTER,filter:filter});
 
-
 export {
     changeTextField,
     addNewEntry,
@@ -79,6 +78,6 @@ export {
     changeElSelection,
     changeSelectedAll,
     refreshEntries,
-    changeFilter
+    changeFilter,
 }
 export default HomeReducer

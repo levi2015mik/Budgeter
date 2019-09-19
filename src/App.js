@@ -18,7 +18,7 @@ function App() {
                     <Route exact path="/" render={()=><HomeWraper store={store} />} />
                     <Route path="/categories" render={Categories}/>
                     <Route path="/help" render={Help}/>
-                    <Route path="/account/:id" render={Account} />
+                    <Route path="/account/:id?" render={Account} />
                 </div>
             </HashRouter>
         </div>

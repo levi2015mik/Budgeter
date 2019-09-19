@@ -11,15 +11,15 @@ function mapStateToProps(state){
         entries: state.HomeReducer.filteredEntries,
         textFieldValue: state.HomeReducer.newEntryName,
         filter:state.HomeReducer.filter,
-        activateTaskTime:state.HomeReducer.activateTaskTime
+        activateTaskTime:state.HomeReducer.activateTaskTime,
     }
 }
 const mapDispatchToProps = {
     changeTextField:importedData.changeTextField,
     addNewEntry:actor.addTask,
     activateDataFilter:actor.tasksFilter,
-    preAcceptElement:actor.preAcceptSelected,
-    preAcceptSelected:actor.preAcceptElement,
+    preAcceptElement:actor.preAcceptElement,
+    preAcceptSelected:actor.preAcceptSelected,
     deleteEntrie:actor.delTask,
     deleteSelected:actor.delTask,
     changeElSelection:importedData.changeElSelection,
