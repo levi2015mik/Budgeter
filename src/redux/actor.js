@@ -38,7 +38,7 @@ function tasksFilter(conditions){
             year: now.year(),
             month:now.month(),
             date:now.date(),
-            selector:"d"
+            selector:"W"
         };
     }
 
@@ -84,8 +84,23 @@ function delTask(id) {
     }
 }
 
+function preAcceptElement(id) {
+    return (dispatch, getState)=>{
+        alert(0)
+    }
+}
+
+function preAcceptSelected() {
+    return (dispatch, getState)=>{
+        alert(1)
+    }
+}
+
 export default {
     addTask,
     tasksFilter,
-    delTask
+    delTask,
+    preAcceptElement: preAcceptElement,
+    preAcceptSelected: preAcceptSelected
+
 }

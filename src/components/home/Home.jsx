@@ -1,20 +1,33 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import css from "./home.module.css"
 import Entry from "./Entry"
 import Calendar from "../Calendar/Calendar";
 import SmallCalendar from "../Calendar/SmallCalendar";
-
+import {Redirect} from "react-router-dom";
 
 function Home(props) {
     // Запуск фильтрации для вывода данных. Запускается только один раз
     useEffect(props.activateDataFilter,[]);
 
+    let [redirect, setRedirect] = useState({go:false,path:"/account/1"});
+
     function changeField(ev) {
-        props.changeTextField(ev.target.value)
+        props.changeTextField(ev.target.value);
     }
+
+    function preAcceptEl(id) {
+        props.preAcceptElement(id);
+        setRedirect({go:true})
+    }
+    function preAcceptSelected() {
+
+        props.preAcceptSelected()
+    }
+
     const entries = props.entries;
     return(
         <div className={css.home}>
+            {redirect.go && <Redirect to={"/account/2"}/>}
             <div className={css.dateSelect}>
                 <input value={props.textFieldValue} type="text" onChange={changeField} placeholder="Name of entry" />
                 <SmallCalendar
@@ -26,7 +39,7 @@ function Home(props) {
                 <input value="Add new entry" type="button" onClick={props.addNewEntry}/>
             </div>
             <div>
-                <input value="Accept selected" type="button" onClick={props.acceptSelected}/>
+                <input value="Accept selected" type="button" onClick={preAcceptSelected}/>
                 <input value="Delete selected" type="button" onClick={props.deleteSelected}/>
 
                 <input
@@ -57,7 +70,7 @@ function Home(props) {
                        accepted={el.accepted}
                        selected={el.selected}
                        toggleElSelect = {props.changeElSelection}
-                       accept={props.acceptElement}
+                       accept={preAcceptEl}
                        del={props.deleteEntrie}
                 />
             )}
@@ -66,4 +79,4 @@ function Home(props) {
     )
 }
 
-export default Home
+export default Home;

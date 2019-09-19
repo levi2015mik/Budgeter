@@ -8,7 +8,7 @@ import MainTable from "./MainTable";
 
 /**
  * Маленький календарь с возможностью выбора только даты
- * TODO C
+ * TODO Cделать компонент управляемым
  * @param {Object} props {
  *  {string} locale
  *  {string) label

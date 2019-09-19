@@ -1,7 +1,6 @@
 const ADD_NEW_ENTRY = "ADD_NEW_ENTRY";
 const CHANGE_ENTER_FIELD = "CHANGE_ENTER_FIELD";
 const DELETE = "DELETE";
-const ACCEPT = "ACCEPT";
 const CHANGE_SELECTION = "CHANGE_SELECTION";
 const CHANGE_SELECTION_ALL = "CHANGE_SELECTION_ALL";
 const REFRESH_ALL = "REFRESH_ALL";
@@ -41,26 +40,6 @@ function HomeReducer(state = DEFAULT_STATE,action) {
 
             }
 
-        case ACCEPT:
-            if(action.value) {
-                let entries = state.filteredEntries.map((el)=>{
-                    if(el.id === action.value){
-                        el.accepted = true;
-                    }
-                    return el;
-                });
-                return { ...state,filteredEntries:entries}
-            } else {
-                let entries = state.filteredEntries.map((el)=>{
-                    let selected = el.selected;
-                    el.selected = false;
-                    if(selected) el.accepted = true;
-                    return el;
-                });
-                return { ...state,filteredEntries:entries};
-            }
-
-
         case CHANGE_SELECTION: {
             let entries = state.filteredEntries.map((el) => {
                 if (el.id === action.value) el.selected = !el.selected;
@@ -85,8 +64,6 @@ function HomeReducer(state = DEFAULT_STATE,action) {
 const changeTextField =(value)=>({type:CHANGE_ENTER_FIELD,value: value});
 const changeActivateTime = (time) =>({type:CHANGE_TASK_ACTIVATE_TIME,time:time});
 const addNewEntry = (newTask) => ({type:ADD_NEW_ENTRY,newTask:newTask});
-const acceptElement = (id) =>({type:ACCEPT,value:id});
-const acceptSelected = () => ({type:ACCEPT});
 const deleteEntry = (id) => ({type:DELETE,value:id});
 const changeElSelection = (id) => ({type:CHANGE_SELECTION,value:id});
 const changeSelectedAll = (sign) => ({type:CHANGE_SELECTION_ALL,value:sign});
@@ -98,8 +75,6 @@ export {
     changeTextField,
     addNewEntry,
     changeActivateTime,
-    acceptElement,
-    acceptSelected,
     deleteEntry,
     changeElSelection,
     changeSelectedAll,

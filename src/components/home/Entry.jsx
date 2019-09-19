@@ -1,9 +1,11 @@
 import React from "react";
 import css from "./Entry.module.css"
+import {NavLink} from "react-router-dom";
 
 function Entry(props) {
     let id = props.id;
     let gray = props.accepted? {color: "#bbbbbb"}: {color:"#000"};
+    let NameStr = props.accepted? (<NavLink to={"/account/" + props.id}>props.name</NavLink>):props.name;
     return(
         <div className={css.entry}>
             <input
@@ -16,7 +18,9 @@ function Entry(props) {
             />
 
             <span className={css.textContainer} style={gray}>
-                <label htmlFor={id}>{props.name}</label>
+                <label htmlFor={id}>
+                    {NameStr}
+                </label>
             </span>
             <span className={css.btnContainer}>
                 <input
