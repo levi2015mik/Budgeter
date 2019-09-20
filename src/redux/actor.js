@@ -92,7 +92,9 @@ function preAcceptElement(id) {
 
 function preAcceptSelected() {
     return (dispatch, getState)=>{
-        alert(1)
+        let entries = getState().HomeReducer.filteredEntries;
+        let selected = entries.filter((el)=> el.selected).map(el=>el.id);
+        dispatch(TasksCcountsReducer.addNewAccount(selected));
     }
 }
 

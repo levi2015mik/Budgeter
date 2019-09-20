@@ -32,8 +32,11 @@ function TasksAccountsReducer(state = DEFAULT_STATE, action) {
             let accountId = state.accounts.length; // Определяем идентификатор будущего счета -- Возможно потом станет зависимо от бэкенда
             let newAccount = {tasks:action.tasks, id:accountId, accepted:false}; // Создаем объект нового счета со ссылками на таски
             let newTasks = state.tasks.map((el)=>{ // Вносим ссылку в таски
-                let isChanged = action.tasks.some((num)=>num === el.id); // Проверяем, входит ли таск в число выбранных
-                if(isChanged) el.account = accountId; // Если входит - заносим идентификатор
+                if(action.tasks.some((num)=>num === el.id)){ // Проверяем, входит ли таск в число выбранных
+                    el.account = accountId; //заносим идентификатор
+                    el.accepted = true      // Устанавливаем статус accepted
+                    // TODO Переложить в другое действие на случай отмены акцепта пользователем
+                }
                 return el;
             });
             return {

@@ -21,10 +21,13 @@ function Home(props) {
     }
     function preAcceptSelected() {
 
-        props.preAcceptSelected()
+        props.preAcceptSelected();
+        setRedirect({go:true,to:"/account"})
+
     }
 
     const entries = props.entries;
+
     return(
         <div className={css.home}>
             {redirect.go && <Redirect to={redirect.to}/>}
@@ -68,6 +71,7 @@ function Home(props) {
                        name={el.name}
                        id={el.id}
                        accepted={el.accepted}
+                       account={el.account}
                        selected={el.selected}
                        toggleElSelect = {props.changeElSelection}
                        accept={preAcceptEl}
