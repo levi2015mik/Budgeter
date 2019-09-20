@@ -33,9 +33,10 @@ function TasksAccountsReducer(state = DEFAULT_STATE, action) {
             let newAccount = {tasks:action.tasks, id:accountId, accepted:false}; // Создаем объект нового счета со ссылками на таски
             let newTasks = state.tasks.map((el)=>{ // Вносим ссылку в таски
                 if(action.tasks.some((num)=>num === el.id)){ // Проверяем, входит ли таск в число выбранных
+                    // TODO Переложить в другое действие на случай отмены акцепта пользователем
                     el.account = accountId; //заносим идентификатор
                     el.accepted = true      // Устанавливаем статус accepted
-                    // TODO Переложить в другое действие на случай отмены акцепта пользователем
+
                 }
                 return el;
             });

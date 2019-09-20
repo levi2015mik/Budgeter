@@ -16,7 +16,7 @@ function addTask() {
     return (dispatch, getState) =>{
         let state = getState();
         let activateTaskTime = state.HomeReducer.activateTaskTime;
-        let nextTaskId = state.TasksAccoountsReducer.tasks.length;
+        let nextTaskId = state.TasksAccountsReducer.tasks.length;
         let newEntryName = state.HomeReducer.newEntryName;
         let newTask = {
             name:newEntryName,
@@ -49,7 +49,7 @@ function tasksFilter(conditions){
     });
 
     return (dispatch, getState) =>{
-        let insertedData = getState().TasksAccoountsReducer.tasks;
+        let insertedData = getState().TasksAccountsReducer.tasks;
 
         insertedData = insertedData.filter(el =>{
             let time = moment(el.activated);
