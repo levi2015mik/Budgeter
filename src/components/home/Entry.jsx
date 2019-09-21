@@ -5,7 +5,7 @@ import {NavLink} from "react-router-dom";
 function Entry(props) {
     let id = props.id;
     let gray = props.accepted? {color: "#bbbbbb"}: {color:"#000"};
-    let NameStr = (props.accepted)? (<NavLink to={"/account/" + props.account}>props.name</NavLink>):props.name;
+    let NameStr = (props.accepted)? (<NavLink to={"/account/" + props.account}>{props.name}</NavLink>):props.name;
     return(
         <div className={css.entry}>
             <input

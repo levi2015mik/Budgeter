@@ -1,0 +1,38 @@
+.account{
+    font-size: 1.2em;
+}
+.account input{
+    font-size: 1.2em;
+}
+.account time{
+    font-style: italic;
+}
+.account div {
+    margin-bottom: 0.3em;
+}
+.account h2{
+    display: inline-block;
+    margin-right: 5em;
+    margin-top: 0.3em;
+    margin-bottom: 0.1em;
+}
+.account h3{
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
+}
+.account time{
+    display: inline-block;
+    padding: 0.1em 0.3em;
+    border-radius: 5px;
+    background: #CCCCCC;
+    border: solid 2px #717171;
+}
+
+@media (max-width: 600px) {
+    .account input{
+        max-width: 250px;
+    }
+    .account table input{
+        max-width: 110px;
+    }
+}

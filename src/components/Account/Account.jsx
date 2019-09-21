@@ -1,7 +1,9 @@
-import React from "react";
-import {Field, initialize, reduxForm} from "redux-form";
+import React, {useEffect} from "react";
+import {arrayPush, Field, FieldArray, initialize, reduxForm} from "redux-form";
+import css from "./account.module.css"
 import store from "../../redux/mystore";
 import {Provider} from "react-redux";
+import moment from "moment";
 
 /**
  * Форма ввода и просмотра счета. Использует redux-form
@@ -17,10 +19,54 @@ import {Provider} from "react-redux";
  * @param props
  * @returns {*}
  */
-function namesList(props){
-    return<> </>
+function NamesList(props){
+    function pushEmptyElement(e,index) {
+        if(e.target.value && index === (props.fields.length - 1)) props.fields.push("")
+    }
+    function removeElement(index) {
+        if(props.fields.length > 1) props.fields.remove(index)
+    }
+    return <div>
+        {props.fields.map((el,index)=>
+            <div key={index}>
+                <Field component="input" name={el} onChange={e=>pushEmptyElement(e,index)}/>
+                <input type="button" value="X" onClick={()=>removeElement(index)}/>
+            </div>)
+        }
+    </div>
 }
 
+/**
+ * Таблица дополнительных параметров
+ * TODO Попробовать без FieldArray
+ * @param props
+ * @returns {*}
+ * @constructor
+ */
+function Params(props) {
+    function removeElement(index) {
+        if(props.fields.length > 1) props.fields.remove(index)
+    }
+    function pushEmptyElement(e,index) {
+        console.log(9);
+        if(e.target.value && index === (props.fields.length - 1)) props.fields.push(["", ""])
+    }
+    return <table>
+        <tbody>
+        {props.fields.map((el,index)=> <tr key={index}>
+            <FieldArray onChange={(e)=>{pushEmptyElement(e,index)}} component={Param} name={el}/>
+            <td><input type={"button"} value={"X"} onClick={()=>{removeElement(index)}}/></td>
+        </tr>
+        )}
+        </tbody>
+    </table>
+}
+
+function Param(props) {
+
+    let out = props.fields.map((el,index)=><td key={index}><Field onChange={(e)=>props.onChange(e)} component="input" name={el}/></td>);
+    return <>{out}</>
+}
 /**
  * Форма счета.
  * ##Пункты:
@@ -36,12 +82,23 @@ function namesList(props){
 function AccountForm(props){
     function clicker() {
 
-        store.dispatch(initialize("account",{name:"Mi"}))
+        // store.dispatch(initialize("account", {params: [{name:"aaa",value:""}]}));
+        store.dispatch(arrayPush("account","params",["12",""]));
     }
     return <form>
-        <Field name="name" component="input" placeholder="Nop"/>
-        <input type={"button"} onClick={clicker}/>
-        <input type={"submit"}/>
+        <div>
+            <h3>List of names:</h3>
+            <FieldArray component={NamesList} name={"names"}/>
+        </div>
+        <div>
+            <h3>Price:</h3>
+            <Field component={"input"} name={"price"}/>
+        </div>
+        <div>
+            <h3>Parameters</h3>
+            <FieldArray component={Params} name={"params"}/>
+        </div>
+        <input type={"submit"}/><input type={"reset"} onClick={clicker}/>
     </form>
 }
 
@@ -51,6 +108,7 @@ let AccountReduxForm = ()=><Provider store={store}><Formed/></Provider>;
 
 
 function Account(props) {
+    let isAccepted = props.match.params.id !== undefined;
     let id = props.match.params.id !== undefined? props.match.params.id: props.currentAccountId;
     let account = props.accounts[id];
     /*
@@ -61,19 +119,20 @@ function Account(props) {
     // Эта ошибка возникает при перезагрузке страницы. Идут неверные параметры
     // Решение - редирект
     try {
-        rawNames = account.tasks.map((el) => props.tasks[el].name);
+        rawNames = account.tasks.map((el) => ({name:props.tasks[el].name,activated:props.tasks[el].activated}));
     } catch(err){
         props.history.push("/")
     }
     for(let i = 0;i < rawNames.length;i++){
-        rawNames[i].split(",").forEach(el=>{names.push(el)})
+        rawNames[i].name.split(",").forEach(el=>{names.push(el)})
     }
+    // Инициализация данных формы ввода при создании
+    useEffect(()=>{store.dispatch(initialize("account",{names:[...names,""], params:[["NN","221"],["",""]]}))},[names]);
 
-    console.log(names);
-
-    return <div>Account
-        {id}
-            <AccountReduxForm/>
+    return <div className={css.account}>
+        <h2>Account №: {id}</h2>
+        <time dateTime={moment(account.time).format("YYYY-MM-DD")}>{moment(account.time).format("DD.MM.YY")}</time>
+            <AccountReduxForm accepted={isAccepted}/>
         </div>
 }
 

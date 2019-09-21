@@ -86,7 +86,7 @@ function delTask(id) {
 
 function preAcceptElement(id) {
     return (dispatch)=>{
-        dispatch(TasksCcountsReducer.addNewAccount([id]));
+        dispatch(TasksCcountsReducer.addNewAccount([id],Date.now()));
     }
 }
 
@@ -94,7 +94,7 @@ function preAcceptSelected() {
     return (dispatch, getState)=>{
         let entries = getState().HomeReducer.filteredEntries;
         let selected = entries.filter((el)=> el.selected).map(el=>el.id);
-        dispatch(TasksCcountsReducer.addNewAccount(selected));
+        dispatch(TasksCcountsReducer.addNewAccount(selected,Date.now()));
     }
 }
 
