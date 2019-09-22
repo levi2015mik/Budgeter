@@ -14,7 +14,7 @@ export function Input(props) {
                 {...props.input}
                 placeholder={props.label}
                 type={props.type}
-                disabled={context.disabled}
+                disabled={context.disabled || props.disabled}
                 onChange={(e) => {
                     props.input.onChange(e)
                 }}
@@ -39,7 +39,7 @@ export function SimpleInput(props) {
     <FormData.Consumer>
         {(context) => <input
             { ...props}
-            disabled={context.disabled}
+            disabled={context.disabled || props.disabled}
         /> }
     </FormData.Consumer>)
 }

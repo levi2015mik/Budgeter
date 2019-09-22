@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect,useState} from "react";
 import {arrayPush, Field, FieldArray, Form, initialize, reduxForm} from "redux-form";
 import css from "./account.module.css"
 import store from "../../redux/mystore";
@@ -7,6 +7,7 @@ import moment from "moment";
 
 import {Input, SimpleInput} from "./elements"
 import FormData from "./FormData"
+import validate from "./validate"
 
 /**
  * Форма ввода и просмотра счета. Использует redux-form
@@ -23,6 +24,13 @@ import FormData from "./FormData"
  * @returns {*}
  */
 function NamesList(props) {
+
+    let [lockBtn,setLockBtn] = useState(false);
+    useEffect(()=>{
+        if(props.fields.length === 1) setLockBtn(true);
+        else if(props.fields.length > 1) setLockBtn(false);
+    },[props.fields.length]);
+
     function pushEmptyElement(e, index) {
         if (e.target.value && index === (props.fields.length - 1)) props.fields.push("")
     }
@@ -31,13 +39,15 @@ function NamesList(props) {
         if (props.fields.length > 1) props.fields.remove(index)
     }
 
+
     return <div>
         {props.fields.map((el, index) =>
             <div key={index}>
                 <Field component={Input} name={el} onChange={e => pushEmptyElement(e, index)}/>
-                <SimpleInput type="button" value="X" onClick={() => removeElement(index)}/>
+                <SimpleInput type="button" disabled={lockBtn} value="X" onClick={() => removeElement(index)}/>
             </div>)
         }
+        {props.meta.error && <span>{props.meta.error}</span>}
     </div>
 }
 
@@ -48,6 +58,13 @@ function NamesList(props) {
  * @constructor
  */
 function Params(props) {
+
+    let [lockBtn,setLockBtn] = useState(false);
+    useEffect(()=>{
+        if(props.fields.length === 1) setLockBtn(true);
+        else if(props.fields.length > 1) setLockBtn(false);
+    },[props.fields.length]);
+
     function removeElement(index) {
         if (props.fields.length > 1) props.fields.remove(index)
     }
@@ -56,13 +73,15 @@ function Params(props) {
         if (e.target.value && index === (props.fields.length - 1)) props.fields.push(["", ""])
     }
 
+
+
     return <table>
         <tbody>
         {props.fields.map((el, index) => <tr key={index}>
                 <FieldArray onChange={(e) => {
                     pushEmptyElement(e, index)
                 }} component={Param} name={el}/>
-                <td><SimpleInput type={"button"} value={"X"} onClick={() => {
+                <td><SimpleInput disabled={lockBtn} type={"button"} value={"X"} onClick={() => {
                     removeElement(index)
                 }}/></td>
             </tr>
@@ -101,7 +120,8 @@ function AccountForm(props) {
         store.dispatch(arrayPush("account", "params", ["12", ""]));
     }
 
-    return <Form onSubmit={() => {
+    return <Form onSubmit={(e) => {
+        e.preventDefault()
     }}>
             <div>
                 <h3>List of names:</h3>
@@ -117,15 +137,6 @@ function AccountForm(props) {
             </div>
             <SimpleInput type={"submit"}/><SimpleInput type={"reset"} onClick={clicker}/>
     </Form>
-}
-
-// Валидация формы TODO Вынести в отдельный файл
-function validate(value) {
-    return (value.price || typeof value.price === 'number' ? undefined : {
-        price: 'Required',
-        _error: "FUCK YOU",
-        names: {_error: "1234", [0]: 1}
-    })
 }
 
 // HOC AccountReduxForm Он необходим для корректной работы ReduxForm
