@@ -98,11 +98,50 @@ function preAcceptSelected() {
     }
 }
 
+/**
+ * Принятие счета
+ * @param id Идентификатор счета
+ * @param {Object} values Набор параметров, полученных при заполнении формы
+ * @param {Array} names Набор наименований, изначально переданных в форму
+ * @param {Array} ids Набор идентификаторов тасков, выбранных для создания счета
+ */
+function accept(id, values, names, ids) {
+    //
+    console.log("accept");
+    return (dispatch,getState) =>{
+        let state = getState().TasksAccountsReducer;
+
+        let account = {tasks:[]};
+        let newTask = {name:[],id:state.nextTaskId,account: state.newAccountId,activated:Date.now(),accepted: true};
+        let isNewTask = false;
+
+        for(let i = 0; i < values.names.length;i ++){
+            if(values.names[i] === names[i])
+                account.tasks.push(ids[i]);
+            else if(values.names[i] !== ""){
+                isNewTask = true;
+                account.tasks.push(state.nextTaskId);
+                newTask.name.push(values.names[i])
+            }
+        }
+        account.price = values.price;
+
+        if(isNewTask){
+            newTask.name = newTask.name.join(", ");
+            dispatch(TasksCcountsReducer.addNewTask(newTask))
+        }
+
+        dispatch(TasksCcountsReducer.linkTasks(id,ids));
+        dispatch(TasksCcountsReducer.SubmitAccount(id,account))
+        // -- /
+    }
+}
+
 export default {
     addTask,
     tasksFilter,
     delTask,
+    accept,
     preAcceptElement: preAcceptElement,
     preAcceptSelected: preAcceptSelected
-
 }

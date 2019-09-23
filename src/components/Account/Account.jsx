@@ -1,5 +1,5 @@
 import React, {useEffect,useState} from "react";
-import {arrayPush, Field, FieldArray, Form, initialize, reduxForm} from "redux-form";
+import { Field, FieldArray, Form, initialize, reduxForm} from "redux-form";
 import css from "./account.module.css"
 import store from "../../redux/mystore";
 import {Provider} from "react-redux";
@@ -113,11 +113,6 @@ function Param(props) {
  */
 function AccountForm(props) {
     let {handleSubmit} = props;
-    function clicker() {
-
-        // store.dispatch(initialize("account", {params: [{name:"aaa",value:""}]}));
-        store.dispatch(arrayPush("account", "params", ["12", ""]));
-    }
 
     return <Form onSubmit={handleSubmit}>
             <div>
@@ -143,6 +138,7 @@ let AccountReduxForm = (props) => <Provider store={store}><Formed { ...props} />
 
 /**
  * Компонент страницы, на которой выводится форма и заносятся ее данные.
+ * TODO Преобразовать в классовый
  * @param props
  * @returns {*}
  * @constructor
@@ -156,11 +152,11 @@ function Account(props) {
         Подготовка массива names - списка покупок в том числе из наборов, перечисленных через запятую вида
         Макароны, яйца, помидоры, майонез
      */
-    let names = [], rawNames = [];
+    let names = [], ids = [], rawNames = [];
     // Эта ошибка возникает при перезагрузке страницы. Идут неверные параметры
     // Решение - редирект
     try {
-        rawNames = account.tasks.map((el) => ({name: props.tasks[el].name, activated: props.tasks[el].activated}));
+        rawNames = account.tasks.map((el) => ({name: props.tasks[el].name, id: props.tasks[el].id}));
         timeData = moment(account.time).format("YYYY-MM-DD");
         timeString = moment(account.time).format("DD.MM.YY");
     } catch (err) {
@@ -168,12 +164,26 @@ function Account(props) {
     }
     for (let i = 0; i < rawNames.length; i++) {
         rawNames[i].name.split(",").forEach(el => {
-            names.push(el)
+            names.push(el);
+            ids.push(rawNames[i].id)
         })
     }
+
+    /**
+     * Формирует объект для запуска actionCreater Accept
+     * Этот объект содержит обновленный набор names вида [Идентификатор элемента tasks, Идентификатор элемента tasks ...]
+     * и прочие параметры
+     * @param values
+     */
+    function accept(values){
+
+        props.accept(id,values,names,ids);
+        props.history.push("/")
+    }
+
     // Инициализация данных формы ввода при создании
     useEffect(() => {
-        store.dispatch(initialize("account", {names: [...names, ""], params: [["NN", "221"], ["", ""]]}))
+        store.dispatch(initialize("account", {names: [...names, ""],price:account.price, params: [["NN", "221"], ["", ""]]}))
     }, [names]);
 
     return <div className={css.account}>
@@ -181,7 +191,7 @@ function Account(props) {
         <time dateTime={timeData}>{timeString}</time>
         <FormData.Provider value={{disabled:isAccepted}}>
             <AccountReduxForm
-                onSubmit={(e)=>{debugger}}  //TODO Запуск акцепта через Actor
+                onSubmit={accept}
                 exit={()=>{props.history.push("/")}}  // Возврат на верхний уровень без сохранения
             />
         </FormData.Provider>

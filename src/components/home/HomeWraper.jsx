@@ -26,5 +26,5 @@ const mapDispatchToProps = {
     changeSelectedAll:importedData.changeSelectedAll,
     changeActivateTime:importedData.changeActivateTime,
 };
-export default connect(mapStateToProps, mapDispatchToProps,null,{})(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
 
