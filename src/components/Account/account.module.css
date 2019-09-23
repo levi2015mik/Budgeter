@@ -34,6 +34,13 @@
     border: solid 2px #717171;
 }
 
+.error{
+    margin-left: 1em;
+    font-size: 0.9em;
+    color: #be0000;
+    font-weight: bold;
+}
+
 @media (max-width: 600px) {
     .account input {
         max-width: 250px;

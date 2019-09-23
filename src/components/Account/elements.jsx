@@ -1,5 +1,6 @@
 import React from "react"
 import FormData from "./FormData"
+import css from "./account.module.css"
 
 /**
  * Элемент формы input с выводом ошибки
@@ -20,8 +21,8 @@ export function Input(props) {
                 }}
             />
                 {props.meta.touched &&
-                ((props.meta.error && <span>{props.meta.error}</span>) ||
-                    (props.meta.warning && <span>{props.meta.warning}</span>))}
+                ((props.meta.error && <span className={css.error}>{props.meta.error}</span>) ||
+                    (props.meta.warning && <span className={css.warning}>{props.meta.warning}</span>))}
             </>
         }
     </FormData.Consumer>

@@ -47,7 +47,7 @@ function NamesList(props) {
                 <SimpleInput type="button" disabled={lockBtn} value="X" onClick={() => removeElement(index)}/>
             </div>)
         }
-        {props.meta.error && <span>{props.meta.error}</span>}
+        {props.meta.error && <div className={css.error}>{props.meta.error}</div>}
     </div>
 }
 
@@ -105,7 +105,6 @@ function Param(props) {
  * - Дата активации и дата акцепта (только чтение)
  * - Таблица дополнительнеых параметров типа ключ - значение
  * - Кнопки принять, отменить
- * TODO Возвращать общее сообщение об ошибке на форму
  * Сообщения могут быть выданы синхронной валидацией.
  * Блокировка клавиш и полей через селекторы redux-form и возможно action creaters
  * @param props
@@ -133,7 +132,8 @@ function AccountForm(props) {
                 <h3>Parameters</h3>
                 <FieldArray component={Params} name={"params"}/>
             </div>
-            <SimpleInput disabled={!props.valid} type={"submit"}/><SimpleInput type={"reset"} onClick={props.exit}/>
+            <SimpleInput disabled={!props.valid} type={"submit"}/>
+            <input type={"button"} value={"exit"} onClick={props.exit}/>
     </Form>
 }
 
@@ -151,6 +151,7 @@ function Account(props) {
     let isAccepted = props.match.params.id !== undefined;
     let id = props.match.params.id !== undefined ? props.match.params.id : props.currentAccountId;
     let account = props.accounts[id];
+    let timeData = "",timeString = "";
     /*
         Подготовка массива names - списка покупок в том числе из наборов, перечисленных через запятую вида
         Макароны, яйца, помидоры, майонез
@@ -160,6 +161,8 @@ function Account(props) {
     // Решение - редирект
     try {
         rawNames = account.tasks.map((el) => ({name: props.tasks[el].name, activated: props.tasks[el].activated}));
+        timeData = moment(account.time).format("YYYY-MM-DD");
+        timeString = moment(account.time).format("DD.MM.YY");
     } catch (err) {
         props.history.push("/")
     }
@@ -175,7 +178,7 @@ function Account(props) {
 
     return <div className={css.account}>
         <h2>Account №: {id}</h2>
-        <time dateTime={moment(account.time).format("YYYY-MM-DD")}>{moment(account.time).format("DD.MM.YY")}</time>
+        <time dateTime={timeData}>{timeString}</time>
         <FormData.Provider value={{disabled:isAccepted}}>
             <AccountReduxForm
                 onSubmit={(e)=>{debugger}}  //TODO Запуск акцепта через Actor
