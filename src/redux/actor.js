@@ -38,7 +38,7 @@ function tasksFilter(conditions){
             year: now.year(),
             month:now.month(),
             date:now.date(),
-            selector:"W"
+            selector:"M"
         };
     }
 

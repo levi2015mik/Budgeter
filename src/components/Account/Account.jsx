@@ -105,7 +105,7 @@ function Param(props) {
  * - Дата активации и дата акцепта (только чтение)
  * - Таблица дополнительнеых параметров типа ключ - значение
  * - Кнопки принять, отменить
- * TODO Выполнить валидацию с блокировками кнопок и полей, а также выдачей сообщений.
+ * TODO Возвращать общее сообщение об ошибке на форму
  * Сообщения могут быть выданы синхронной валидацией.
  * Блокировка клавиш и полей через селекторы redux-form и возможно action creaters
  * @param props
@@ -113,16 +113,14 @@ function Param(props) {
  * @constructor
  */
 function AccountForm(props) {
-
+    let {handleSubmit} = props;
     function clicker() {
 
         // store.dispatch(initialize("account", {params: [{name:"aaa",value:""}]}));
         store.dispatch(arrayPush("account", "params", ["12", ""]));
     }
 
-    return <Form onSubmit={(e) => {
-        e.preventDefault()
-    }}>
+    return <Form onSubmit={handleSubmit}>
             <div>
                 <h3>List of names:</h3>
                 <FieldArray component={NamesList} name={"names"}/>
@@ -135,13 +133,13 @@ function AccountForm(props) {
                 <h3>Parameters</h3>
                 <FieldArray component={Params} name={"params"}/>
             </div>
-            <SimpleInput type={"submit"}/><SimpleInput type={"reset"} onClick={clicker}/>
+            <SimpleInput disabled={!props.valid} type={"submit"}/><SimpleInput type={"reset"} onClick={props.exit}/>
     </Form>
 }
 
 // HOC AccountReduxForm Он необходим для корректной работы ReduxForm
 const Formed = reduxForm({form: "account", initialValues: {name: "1234"}, validate})(AccountForm);
-let AccountReduxForm = () => <Provider store={store}><Formed/></Provider>;
+let AccountReduxForm = (props) => <Provider store={store}><Formed { ...props} /></Provider>;
 
 /**
  * Компонент страницы, на которой выводится форма и заносятся ее данные.
@@ -179,7 +177,10 @@ function Account(props) {
         <h2>Account №: {id}</h2>
         <time dateTime={moment(account.time).format("YYYY-MM-DD")}>{moment(account.time).format("DD.MM.YY")}</time>
         <FormData.Provider value={{disabled:isAccepted}}>
-            <AccountReduxForm accepted={isAccepted}/>
+            <AccountReduxForm
+                onSubmit={(e)=>{debugger}}  //TODO Запуск акцепта через Actor
+                exit={()=>{props.history.push("/")}}  // Возврат на верхний уровень без сохранения
+            />
         </FormData.Provider>
     </div>
 }
