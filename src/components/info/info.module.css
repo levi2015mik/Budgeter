@@ -1,0 +1,42 @@
+.info{
+    font-size: 1.2em;
+}
+.infoTb{}
+.info table.infoTb{
+    margin-top: 0.3em;
+    border: 1px #666 solid;
+    border-collapse: collapse;
+}
+.info tr.infoTb {
+    background: #c8e9eb;
+}
+.info td.infoTb {
+    padding: 0.2em 0.4em;
+    border-bottom: 1px #666 dashed;
+}
+.info  td.infoTb:first-child{
+    padding-right: 10em;
+}
+.info  td.infoTb:last-child{
+    padding-right: 1em;
+}
+
+.info caption.infoTb{
+    caption-side: top;
+    text-align: left;
+    margin-bottom: 0.3em;
+}
+.info caption.infoTb span.infoTb{
+    font-weight: bold;
+}
+
+.info input{
+    font-size: 1.2em;
+    margin: 0;
+}
+
+.info button{
+    margin: 0;
+    background: white;
+    font-size: 1.2em;
+}

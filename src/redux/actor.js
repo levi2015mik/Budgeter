@@ -30,24 +30,29 @@ function addTask() {
     }
 }
 
-// Фильтрация данных, выводимых пользователю
-function tasksFilter(conditions){
-    if(typeof conditions ===  "undefined"){
+// Обработка данных от компонента Calendar
+function CalendarCallback(conditions){
+    if(typeof conditions ===  "undefined") {
         let now = moment();
         conditions = {
             year: now.year(),
-            month:now.month(),
-            date:now.date(),
-            selector:"M"
+            month: now.month(),
+            date: now.date(),
+            selector: "M"
         };
     }
-
     let filterTime = moment({
         year:conditions.year,
         month:conditions.month,
         date:conditions.date
     });
 
+    return [conditions,filterTime]
+}
+
+// Фильтрация данных, выводимых пользователю
+function tasksFilter(params){
+    const [conditions,filterTime] = CalendarCallback(params);
     return (dispatch, getState) =>{
         let insertedData = getState().TasksAccountsReducer.tasks;
 
