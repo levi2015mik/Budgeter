@@ -20,11 +20,35 @@ function Info(props) {
                 />
             </caption>
             <tbody className={css.infoTb}>
-            <tr className={css.infoTb}><td className={css.infoTb}>Current time expenses</td><td className={css.infoTb}>2999</td></tr>
-            <tr className={css.infoTb}><td className={css.infoTb}>Average day expenses</td><td className={css.infoTb}>2999</td></tr>
-            <tr className={css.infoTb}><td className={css.infoTb}>Average week expenses</td><td className={css.infoTb}>2999</td></tr>
-            <tr className={css.infoTb}><td className={css.infoTb}>Average month expenses</td><td className={css.infoTb}>2999</td></tr>
-            <tr className={css.infoTb}><td className={css.infoTb}>Average year expenses</td><td className={css.infoTb}>2999</td></tr>
+            <tr className={css.infoTb}>
+                <td className={css.infoTb}>Current time expenses</td>
+                <td className={css.infoTb}>{props.CurrentSum}</td>
+                <td className={css.infoTb}>Accounts: {props.CountAccountsFromFiltered}</td>
+                <td className={css.infoTb}>Tasks: {props.CountTasks}</td>
+                </tr>
+            <tr className={css.infoTb}><td className={css.infoTb}>Average day expenses</td>
+                <td className={css.infoTb}>2999</td>
+                <td className={css.infoTb}> </td>
+                <td className={css.infoTb}> </td>
+            </tr>
+            <tr className={css.infoTb}>
+                <td className={css.infoTb}>Average week expenses</td>
+                <td className={css.infoTb}>2999</td>
+                <td className={css.infoTb}> </td>
+                <td className={css.infoTb}> </td>
+            </tr>
+            <tr className={css.infoTb}>
+                <td className={css.infoTb}>Average month expenses</td>
+                <td className={css.infoTb}>2999</td>
+                <td className={css.infoTb}> </td>
+                <td className={css.infoTb}> </td>
+            </tr>
+            <tr className={css.infoTb}>
+                <td className={css.infoTb}>Average year expenses</td>
+                <td className={css.infoTb}>2999</td>
+                <td className={css.infoTb}> </td>
+                <td className={css.infoTb}> </td>
+            </tr>
             </tbody>
         </table>
     </div>
