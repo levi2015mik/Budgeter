@@ -1,68 +1,23 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Финансовое приложение для персонального использования
 
-## Available Scripts
+#Назначение и возможности
+Цель создания приложения - планирование и калькуляция расходов.
+Функционал позволяет составлять списки покупок и других затрат,
+В момент покупки указывать фактическую цену одного или нескольких товаров, добавлять описание.
+Просматривать значения затрат за заданный период времени, а также средние значения.
+Изучать список товаров, их среднюю стоимость и периодичность покупки.
 
-In the project directory, you can run:
+Это позволяет начать контролировать расходы не сразу, а постепенно, добавляя новые параметры
+и новые возможности исследования своих затрат.
 
-### `npm start`
-
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+#Технологии
+Основной инструмент разработки - react.js
+Для управления состоянием применяется redux с модулями react-redux.
+redux-thunk выполняет действия, требующие совершить несколько более простых dispatch.
+reselect предназначен для вывода данных вычисляемых данных на основе state в компоненты.
+На данный момент это рассчет затрат и средних значений. В будущем - полная замена HomeReducer с его фильтрацией.
+Дополнительно применяется redux-form для управления большими формами ввода данных.
+Для быстрой и удобной манипуляции временем применен moment.js
+Приложение сохраняет свои данные в localstorage. с использованием redux-localstorage-simple.
+Это затрудняет практическое применение с конфиденциальными данными,
+но упрощает разработку, так как отпадает необходимость в бэк енде и системе авторизации.
