@@ -52,7 +52,8 @@ function AVGOfPeriod(accounts, period) {
     accounts.forEach((el)=>{
         avgRes += Number(el.price);
     });
-    return avgRes / periods
+    let res = avgRes / periods;
+    return !isNaN(res)? res : "-"
 }
 
 /**
@@ -64,7 +65,8 @@ function AVGOfPeriod(accounts, period) {
  */
 function AVGAccountsOfPeriod(accounts, period) {
     let periods = countTimePeriodsInAccounts(accounts,period);
-    return accounts.length / periods;
+    let res = accounts.length / periods;
+    return !isNaN(res) ? res :  "-"
 }
 
 export const getAccounts = (state) => state.TasksAccountsReducer.accounts;
