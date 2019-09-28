@@ -24,28 +24,50 @@ function Info(props) {
                 <td className={css.infoTb}>Current time expenses</td>
                 <td className={css.infoTb}>{props.CurrentSum}</td>
                 <td className={css.infoTb}>Accounts: {props.CountAccountsFromFiltered}</td>
-                <td className={css.infoTb}>Tasks: {props.CountTasks}</td>
+                <td className={css.infoTb}>Tasks: {props.CountTasksOfSelected}</td>
                 </tr>
             <tr className={css.infoTb}><td className={css.infoTb}>Average day expenses</td>
-                <td className={css.infoTb}>2999</td>
+                <td className={css.infoTb}>{props.AVGDay}</td>
+                <td className={css.infoTb}> </td>
+                <td className={css.infoTb}> </td>
+            </tr>
+            <tr className={css.infoTb}><td className={css.infoTb}>Average accounts of day</td>
+                <td className={css.infoTb}>{props.getAVGAccountsOfDay}</td>
                 <td className={css.infoTb}> </td>
                 <td className={css.infoTb}> </td>
             </tr>
             <tr className={css.infoTb}>
                 <td className={css.infoTb}>Average week expenses</td>
-                <td className={css.infoTb}>2999</td>
+                <td className={css.infoTb}>{props.AVWeek}</td>
+                <td className={css.infoTb}> </td>
+                <td className={css.infoTb}> </td>
+            </tr>
+            <tr className={css.infoTb}><td className={css.infoTb}>Average accounts of week</td>
+                <td className={css.infoTb}>{props.getAVGAccountsOfWeek}</td>
                 <td className={css.infoTb}> </td>
                 <td className={css.infoTb}> </td>
             </tr>
             <tr className={css.infoTb}>
                 <td className={css.infoTb}>Average month expenses</td>
-                <td className={css.infoTb}>2999</td>
+                <td className={css.infoTb}>{props.AVGMonth}</td>
+                <td className={css.infoTb}> </td>
+                <td className={css.infoTb}> </td>
+            </tr>
+            <tr className={css.infoTb}>
+                <td className={css.infoTb}>Average accounts of month</td>
+                <td className={css.infoTb}>{props.getAVGAccountsOfMonth}</td>
                 <td className={css.infoTb}> </td>
                 <td className={css.infoTb}> </td>
             </tr>
             <tr className={css.infoTb}>
                 <td className={css.infoTb}>Average year expenses</td>
-                <td className={css.infoTb}>2999</td>
+                <td className={css.infoTb}>{props.AVGYear}</td>
+                <td className={css.infoTb}> </td>
+                <td className={css.infoTb}> </td>
+            </tr>
+            <tr className={css.infoTb}>
+                <td className={css.infoTb}>Average accounts of year</td>
+                <td className={css.infoTb}>{props.getAVGAccountsOfYear}</td>
                 <td className={css.infoTb}> </td>
                 <td className={css.infoTb}> </td>
             </tr>

@@ -17,6 +17,13 @@
 .info  td.infoTb:first-child{
     padding-right: 10em;
 }
+
+@media (max-width: 900px) {
+    .info  td.infoTb:first-child{
+        padding-right: 4em;
+    }
+}
+
 .info  td.infoTb:last-child{
     padding-right: 1em;
 }

@@ -2,7 +2,7 @@ import {createSelector} from "reselect"
 import moment from "moment"
 
 function CalendarCallback(conditions){
-    if(typeof conditions.selector ===  "undefined") {
+    if( typeof conditions ===  "undefined" || typeof conditions.selector ===  "undefined") {
         let now = moment();
         conditions = {
             year: now.year(),
@@ -18,6 +18,53 @@ function CalendarCallback(conditions){
     });
 
     return [filterTime,conditions.selector]
+}
+
+/**
+ * Расчет количества периодов (дней, недель, месяцев или лет в заданном массиве счетов)
+ * @param accounts
+ * @param period
+ * @returns {number}
+ */
+function countTimePeriodsInAccounts(accounts, period) {
+    let counter = 0;
+    let time = moment(0);
+    accounts.forEach((el)=>{
+        let now = moment(el.time);
+        if(!now.isSame(time,period)){
+            counter ++;
+            time = now;
+        }
+    });
+    return counter;
+}
+
+/**
+ * Расчет среднех расходов за период
+ * @param accounts
+ * @param period
+ * @returns {number}
+ * @constructor
+ */
+function AVGOfPeriod(accounts, period) {
+    let avgRes = 0;
+    let periods = countTimePeriodsInAccounts(accounts,period);
+    accounts.forEach((el)=>{
+        avgRes += Number(el.price);
+    });
+    return avgRes / periods
+}
+
+/**
+ * Среднее количество счетов за период
+ * @param accounts
+ * @param period
+ * @returns {number}
+ * @constructor
+ */
+function AVGAccountsOfPeriod(accounts, period) {
+    let periods = countTimePeriodsInAccounts(accounts,period);
+    return accounts.length / periods;
 }
 
 export const getAccounts = (state) => state.TasksAccountsReducer.accounts;
@@ -44,6 +91,28 @@ export const CurrentSum = createSelector(FilteredAccounts,(accounts)=>{
 
 export const CountAccountsFromFiltered = createSelector(FilteredAccounts,(accounts)=>accounts.length);
 
-export const CountTasks = createSelector(FilteredAccounts,(accounts)=>
+export const CountTasksOfSelected = createSelector(FilteredAccounts,(accounts)=>
     accounts.reduce((tasks,el)=>el.tasks.length + tasks,0)
 );
+
+export const AVGDay = createSelector([getAccounts],
+    (accounts)=> {
+        return AVGOfPeriod(accounts,"d")});
+
+export const AVWeek = createSelector([getAccounts],
+    (accounts)=> {
+        return AVGOfPeriod(accounts,"W")});
+
+export const AVGMonth = createSelector([getAccounts],
+    (accounts)=> {
+        return AVGOfPeriod(accounts,"M")});
+
+export const AVGYear = createSelector([getAccounts],
+    (accounts)=> {
+        return AVGOfPeriod(accounts,"Y")});
+
+
+export const getAVGAccountsOfDay = createSelector([getAccounts],(accounts)=>AVGAccountsOfPeriod(accounts,"d"));
+export const getAVGAccountsOfWeek = createSelector([getAccounts],(accounts)=>AVGAccountsOfPeriod(accounts,"W"));
+export const getAVGAccountsOfMonth = createSelector([getAccounts],(accounts)=>AVGAccountsOfPeriod(accounts,"M"));
+export const getAVGAccountsOfYear = createSelector([getAccounts],(accounts)=>AVGAccountsOfPeriod(accounts,"Y"));
