@@ -10,6 +10,7 @@ function Header(props) {
                 <li><NavLink to="/categories" >Categories</NavLink></li>
                 <li><NavLink to="/info" >Info</NavLink></li>
                 <li><NavLink to="/help" >Help</NavLink></li>
+                <li><NavLink to="/data" >Data*</NavLink></li>
             </ul>
         </header>
     )

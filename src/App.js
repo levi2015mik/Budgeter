@@ -8,6 +8,7 @@ import Account from "./components/Account/accountContainer";
 import { HashRouter, Route} from "react-router-dom";
 import css from './app.module.css';
 import store from './redux/mystore'
+import Data from "./components/Data/Data";
 
 function App() {
     window.store=store;
@@ -21,6 +22,7 @@ function App() {
                     <Route path="/info" render={()=><InfoContainer store={store} />}/>
                     <Route path="/help" render={Help}/>
                     <Route path="/account/:id?" render={()=><Account store={store}/>} />
+                    <Route path="/data" render={()=><Data store={store}/>} />
                 </div>
             </HashRouter>
         </div>

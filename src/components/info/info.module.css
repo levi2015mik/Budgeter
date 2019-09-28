@@ -19,8 +19,13 @@
 }
 
 @media (max-width: 900px) {
+
     .info  td.infoTb:first-child{
         padding-right: 4em;
+    }
+
+    .info  td.infoTb{
+        font-size: 0.7em;
     }
 }
 

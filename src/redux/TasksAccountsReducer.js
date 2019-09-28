@@ -3,6 +3,7 @@ const DELETE = "DELETE";
 const ADD_EMPTY_ACCOUNT = "ADD_EMPTY_ACCOUNT";
 const SUBMIT_ACCOUNT = "SUBMIT_ACCOUNT";
 const LINK_TASKS_TO_ACCOUNT = "LINK_TASKS_TO_ACCOUNT";
+const REFRASH_ALL = "REFRASH_ALL";
 const DEFAULT_STATE = {
     tasks:[
         {name:"Торт с марципаном", id:0, accepted:false, activated:1568581200000},
@@ -56,6 +57,15 @@ function TasksAccountsReducer(state = DEFAULT_STATE, action) {
                 ...action.content,
                 accepted:true};
             return result;
+
+        case REFRASH_ALL:
+            return {
+                ...state,
+                tasks:action.data.tasks,
+                accounts:action.data.accounts,
+                newTaskId:action.data.newTaskId,
+                newAccountId:action.data.newAccountId
+            };
         default: return state;
     }
 }
@@ -94,11 +104,14 @@ const linkTasks = (accountId,tasks) =>({type:LINK_TASKS_TO_ACCOUNT,accountId:acc
  * @constructor
  */
 const SubmitAccount = (id, data) =>({type: SUBMIT_ACCOUNT,id:id,content:data});
+
+const Refresh = (data) =>({type: REFRASH_ALL,data:data});
 export {
     addNewTask,
     delTask,
     addNewAccount,
     linkTasks,
-    SubmitAccount
+    SubmitAccount,
+    Refresh
 }
 export default TasksAccountsReducer;

@@ -1,0 +1,13 @@
+.data {
+    font-size: 1.2em;
+}
+.data input{
+    font-size: 1.2em;
+}
+.data textarea{
+    margin: 0.5em 0;
+}
+.data .warn{
+    margin: 0.2em;
+    color: #be0000;
+}

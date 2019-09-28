@@ -94,26 +94,13 @@ export const CurrentSum = createSelector(FilteredAccounts,(accounts)=>{
 export const CountAccountsFromFiltered = createSelector(FilteredAccounts,(accounts)=>accounts.length);
 
 export const CountTasksOfSelected = createSelector(FilteredAccounts,(accounts)=>
-    accounts.reduce((tasks,el)=>el.tasks.length + tasks,0)
-);
-
-export const AVGDay = createSelector([getAccounts],
-    (accounts)=> {
-        return AVGOfPeriod(accounts,"d")});
-
-export const AVWeek = createSelector([getAccounts],
-    (accounts)=> {
-        return AVGOfPeriod(accounts,"W")});
-
-export const AVGMonth = createSelector([getAccounts],
-    (accounts)=> {
-        return AVGOfPeriod(accounts,"M")});
-
-export const AVGYear = createSelector([getAccounts],
-    (accounts)=> {
-        return AVGOfPeriod(accounts,"Y")});
+    accounts.reduce((tasks,el)=>el.tasks.length + tasks,0));
 
 
+export const AVGDay = createSelector([getAccounts],(accounts)=>AVGOfPeriod(accounts,"d"));
+export const AVWeek = createSelector([getAccounts],(accounts)=>AVGOfPeriod(accounts,"W"));
+export const AVGMonth = createSelector([getAccounts], (accounts)=>AVGOfPeriod(accounts,"M"));
+export const AVGYear = createSelector([getAccounts], (accounts)=>AVGOfPeriod(accounts,"Y"));
 export const getAVGAccountsOfDay = createSelector([getAccounts],(accounts)=>AVGAccountsOfPeriod(accounts,"d"));
 export const getAVGAccountsOfWeek = createSelector([getAccounts],(accounts)=>AVGAccountsOfPeriod(accounts,"W"));
 export const getAVGAccountsOfMonth = createSelector([getAccounts],(accounts)=>AVGAccountsOfPeriod(accounts,"M"));
