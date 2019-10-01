@@ -2,6 +2,7 @@ import Account from "./Account"
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import actor from "../../redux/actor";
+import {AddCategories} from "../../redux/TasksAccountsReducer"
 
 function mapStateToProps(state) {
     return {
@@ -12,7 +13,8 @@ function mapStateToProps(state) {
     }
 }
 const mapDispatchToProps = {
-  accept: actor.accept
+    accept: actor.accept,
+    addCategories:AddCategories
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(withRouter(Account));

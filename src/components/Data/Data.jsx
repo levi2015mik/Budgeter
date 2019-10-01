@@ -16,7 +16,8 @@ function Data(props) {
     }
 
     function clearStored() {
-        localStorage.clear()
+        localStorage.clear();
+        window.location.reload()
     }
 
     function save(){
@@ -29,6 +30,7 @@ function Data(props) {
         }
 
         props.refresh(dataObj.TasksAccountsReducer);
+        alert("Data is saved")
     }
     return (<div className={css.data}>
         <div>

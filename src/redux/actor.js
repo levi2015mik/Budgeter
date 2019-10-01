@@ -112,7 +112,6 @@ function preAcceptSelected() {
  */
 function accept(id, values, names, ids) {
     //
-    console.log("accept");
     return (dispatch,getState) =>{
         let state = getState().TasksAccountsReducer;
 

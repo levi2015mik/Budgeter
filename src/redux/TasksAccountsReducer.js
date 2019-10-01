@@ -4,6 +4,9 @@ const ADD_EMPTY_ACCOUNT = "ADD_EMPTY_ACCOUNT";
 const SUBMIT_ACCOUNT = "SUBMIT_ACCOUNT";
 const LINK_TASKS_TO_ACCOUNT = "LINK_TASKS_TO_ACCOUNT";
 const REFRASH_ALL = "REFRASH_ALL";
+const ADD_CATEGORIES = "ADD_CATEGORIES";
+
+
 const DEFAULT_STATE = {
     tasks:[
         {name:"Торт с марципаном", id:0, accepted:false, activated:1568581200000},
@@ -14,7 +17,8 @@ const DEFAULT_STATE = {
     ],
     accounts:[],
     newAccountId:0,
-    nextTaskId: 5
+    nextTaskId: 5,
+    categories:[]
 };
 
 function TasksAccountsReducer(state = DEFAULT_STATE, action) {
@@ -64,8 +68,22 @@ function TasksAccountsReducer(state = DEFAULT_STATE, action) {
                 tasks:action.data.tasks,
                 accounts:action.data.accounts,
                 newTaskId:action.data.newTaskId,
-                newAccountId:action.data.newAccountId
+                newAccountId:action.data.newAccountId,
+                categories:action.data.categories
             };
+
+        case ADD_CATEGORIES:
+
+            let categories = state.categories;
+            const price = action.names.length === 1? action.price : null;
+            const insertedObj = {price:price,time:Date.now(),id: action.id};
+
+            action.names.forEach(el=>{
+                if(categories[el] === undefined) categories[el] = [];
+                categories[el].push(insertedObj);
+            });
+
+            return { ...state,categories:categories };
         default: return state;
     }
 }
@@ -106,12 +124,24 @@ const linkTasks = (accountId,tasks) =>({type:LINK_TASKS_TO_ACCOUNT,accountId:acc
 const SubmitAccount = (id, data) =>({type: SUBMIT_ACCOUNT,id:id,content:data});
 
 const Refresh = (data) =>({type: REFRASH_ALL,data:data});
+
+/**
+ * Добавление информации о покупке товара определенной категории
+ * @param {array} names
+ * @param {number} price
+ * @param {number} id
+ * @returns {{type: string, names: *, price: *,id: number}}
+ * @constructor
+ */
+const AddCategories = (names,price,id) => ({type: ADD_CATEGORIES,names:names,price:price,id:id});
+
 export {
     addNewTask,
     delTask,
     addNewAccount,
     linkTasks,
     SubmitAccount,
-    Refresh
+    Refresh,
+    AddCategories
 }
 export default TasksAccountsReducer;

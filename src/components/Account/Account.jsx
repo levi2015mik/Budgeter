@@ -142,6 +142,7 @@ function Account(props) {
     /*
         Подготовка массива names - списка покупок в том числе из наборов, перечисленных через запятую вида
         Макароны, яйца, помидоры, майонез
+        TODO Зарефакторить этоу логику и перенести в бизнес.
      */
     let names = [], ids = [], rawNames = [];
     // Эта ошибка возникает при перезагрузке страницы. Идут неверные параметры
@@ -160,6 +161,10 @@ function Account(props) {
         })
     }
 
+    //Чистка names
+    names = names.map(el=>el.toLowerCase().trim());
+
+
     /**
      * Формирует объект для запуска actionCreater Accept
      * Этот объект содержит обновленный набор names вида [Идентификатор элемента tasks, Идентификатор элемента tasks ...]
@@ -169,7 +174,10 @@ function Account(props) {
     function accept(values){
 
         props.accept(id,values,names,ids);
+        props.addCategories(names,values.price,id);
         props.history.push("/")
+
+        // names - важный бизнес объект. Его задача - хранение наименований Здесь они диспатчатся в Categorys
     }
 
     // Инициализация данных формы ввода при создании
