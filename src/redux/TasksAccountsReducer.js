@@ -18,7 +18,7 @@ const DEFAULT_STATE = {
     accounts:[],
     newAccountId:0,
     nextTaskId: 5,
-    categories:[]
+    categories:{}
 };
 
 function TasksAccountsReducer(state = DEFAULT_STATE, action) {

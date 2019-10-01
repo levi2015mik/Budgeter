@@ -91,6 +91,8 @@ export const CurrentSum = createSelector(FilteredAccounts,(accounts)=>{
     },0)
 });
 
+
+
 export const CountAccountsFromFiltered = createSelector(FilteredAccounts,(accounts)=>accounts.length);
 
 export const CountTasksOfSelected = createSelector(FilteredAccounts,(accounts)=>
@@ -105,3 +107,80 @@ export const getAVGAccountsOfDay = createSelector([getAccounts],(accounts)=>AVGA
 export const getAVGAccountsOfWeek = createSelector([getAccounts],(accounts)=>AVGAccountsOfPeriod(accounts,"W"));
 export const getAVGAccountsOfMonth = createSelector([getAccounts],(accounts)=>AVGAccountsOfPeriod(accounts,"M"));
 export const getAVGAccountsOfYear = createSelector([getAccounts],(accounts)=>AVGAccountsOfPeriod(accounts,"Y"));
+
+
+
+
+/*
+Categories
+ */
+
+/**
+ * Фильтрация набора данных одной категории по интервалу времени
+ * @param category
+ * @param startTime
+ * @param endTime
+ * @returns {{}}
+ */
+function filterCategoryOfTimeBeetwin(category,startTime,endTime) {
+    return {};
+}
+
+/**
+ * Фильтрация набора данных одной категории на заданный день, неделю, месяц, год
+ * @param category
+ * @param time
+ * @param selector
+ * @returns {{}}
+ */
+function filterCategoryOfTimeOn(category, time, selector = "M") {
+    return {}
+}
+
+/**
+ * Подсчет средней стоимости категории
+ * @param category
+ * @returns {number}
+ */
+function getCategoryAvg(category) {
+    const count = category.length;
+    const [sum,ignored] = category.reduce(                    // Суммирование значений. ignored
+        (res, el)=> {                                         // нужен для устранения влияния непроставленных цен на результат
+            res[0] += !!el.price? +el.price : 0 ;             // Дело в том, что при расчете можно учесть лишь те счета, в которых
+            res[1] += !!el.price? 0: 1;                       // исследуемый товар - единственный
+
+            return [res[0],res[1]]
+        }
+        ,[0,0]);
+    const result = sum/(count - ignored);
+    return !isNaN(result)? result : 0;
+}
+
+/**
+ * Получение среднего интервала времени между двумя покупками
+ * @param category
+ * @returns {number}
+ */
+function getCategoryAVGTime(category) {
+    return 0
+}
+
+/**
+ * Вывод подготовленного объекта категорий без фильтрации
+ * @param categories
+ */
+function getCategoriesWithAVG(categories) {
+    let names = Object.keys(categories);
+    let values = Object.values(categories);
+
+    return values.map((el,i)=>{
+        const avg = getCategoryAvg(el);
+        const avgTime = getCategoryAVGTime(el);
+        return {name:names[i],avg:avg,avgTime:avgTime};
+    })
+}
+
+export const getCategories = (state) => state.TasksAccountsReducer.categories;
+export const getUnfilteredCategories = createSelector([getCategories],getCategoriesWithAVG);
+
+

@@ -18,7 +18,7 @@ function App() {
                 <Header/>
                 <div className={css.content}>
                     <Route exact path="/" render={()=><HomeWraper store={store} />} />
-                    <Route path="/categories" render={Categories}/>
+                    <Route path="/categories" render={()=><Categories store={store}/>}/>
                     <Route path="/info" render={()=><InfoContainer store={store} />}/>
                     <Route path="/help" render={Help}/>
                     <Route path="/account/:id?" render={()=><Account store={store}/>} />
