@@ -162,7 +162,16 @@ function getCategoryAvg(category) {
  * @returns {number}
  */
 function getCategoryAVGTime(category) {
-    return 0
+    let intervals = [];
+    for(let i = 0;i < category.length;i ++){
+        if(i === 0) continue;
+        intervals.push(category[i].time - category[i-1].time)
+    }
+
+    let sum = intervals.reduce((memo,el)=>memo + el,0);
+
+    let res = sum/intervals.length;
+    return !isNaN(res)? res : 0;
 }
 
 /**

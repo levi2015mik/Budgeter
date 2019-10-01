@@ -1,16 +1,18 @@
 import React from "react";
 import {connect} from "react-redux";
 import {getUnfilteredCategories} from "../../redux/selectors"
+import css from "./Categories.module.css"
 
 function Categories(props) {
-    console.log(props.categories);
-    return(<div>Categories
+    const avgTimeFmt = (time) => Math.floor(time / 1000/ 60/ 60/ 24);
+    return(<div className={css.categories}>
+        Categories
         <table>
             <thead>
             <tr>
-                <td>Name</td>
-                <td>Cost AVG</td>
-                <td>Interval between purchases</td>
+                <th>Name</th>
+                <th>Cost AVG</th>
+                <th>Interval</th>
             </tr>
             </thead>
             <tbody>
@@ -18,7 +20,7 @@ function Categories(props) {
                 (el,i)=> <Row
                     name={el.name}
                     avg={el.avg}
-                    avgTime={el.avgTime}
+                    avgTime={avgTimeFmt(el.avgTime)}
                     key={i} />)}
             </tbody>
         </table>
