@@ -2,6 +2,23 @@
     padding: 0.5em;
     background: #68abad;
 }
+.header h1{
+    display: inline-block;
+    margin: 0.5em 0;
+    vertical-align: top;
+    font-family: monospace;
+    font-size: 2.5em;
+}
+@media (max-width: 640px) {
+    .header h1{
+        margin-top: 0;
+        margin-left: 0.5em;
+    }
+}
+.logo{
+    width: 64px;
+    height: 64px;
+}
 .header ul {
     margin: 0;
     border: 0;

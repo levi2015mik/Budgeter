@@ -122,9 +122,9 @@ Categories
  * @param endTime
  * @returns {{}}
  */
-function filterCategoryOfTimeBeetwin(category,startTime,endTime) {
-    return {};
-}
+// function filterCategoryOfTimeBeetwin(category,startTime,endTime) {
+//     return {};
+// }
 
 /**
  * Фильтрация набора данных одной категории на заданный день, неделю, месяц, год
@@ -133,9 +133,9 @@ function filterCategoryOfTimeBeetwin(category,startTime,endTime) {
  * @param selector
  * @returns {{}}
  */
-function filterCategoryOfTimeOn(category, time, selector = "M") {
-    return {}
-}
+// function filterCategoryOfTimeOn(category, time, selector = "M") {
+//     return {}
+// }
 
 /**
  * Подсчет средней стоимости категории

@@ -1,6 +1,10 @@
 .info{
     font-size: 1.2em;
 }
+
+.calendar{
+    float: inherit !important;
+}
 .infoTb{}
 .info table.infoTb{
     margin-top: 0.3em;

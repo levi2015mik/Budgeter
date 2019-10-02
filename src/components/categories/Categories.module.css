@@ -8,7 +8,7 @@
     border-collapse: collapse;
 }
 
-.categories td, th{
+.categories td, .categories th{
     background: #c8e9eb;
     padding: 0.2em 0.4em;
     border-bottom: 1px #666 dashed;

@@ -39,5 +39,5 @@ function Row(props) {
 
 export default connect(
     state=>(
-        { categories:getUnfilteredCategories(state) })
+        { categories:getUnfilteredCategories(state) }),{}
 )(Categories)

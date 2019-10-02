@@ -2,14 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="shortcut icon" type="image/png"  href="%PUBLIC_URL%/icons8-doodle-64.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
       content="Personal accounting application"
     />
-    <link rel="apple-touch-icon" href="logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -25,6 +24,18 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>Account app</title>
+    <style type="text/css">
+        .copyright{
+            padding-left: 4em;
+            padding-top: 2em;
+            padding-bottom: 4em;
+            line-height: 1.5;
+            color: #666666;
+        }
+        .copyright a{
+            color: #999999;
+        }
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -39,5 +50,12 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <div class="copyright">
+      &copy; Michael Levitsky<br/>
+      <a target="_blank" href="https://icons8.com/icons/set/shopping-cart--v2">
+        Doodle
+      </a>
+      icon by
+      <a target="_blank" href="https://icons8.com">Icons8</a></div>
   </body>
 </html>

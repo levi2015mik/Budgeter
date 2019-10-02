@@ -4,7 +4,9 @@ import { NavLink} from "react-router-dom";
 function Header(props) {
     return(
         <header className={css.header}>
-            Personal accounting application
+
+            <img src={"/icons8-doodle-64.png"} className={css.logo} alt={""}/>
+            <h1>Personal accounting application</h1>
             <ul>
                 <li><NavLink to="/" >Home</NavLink></li>
                 <li><NavLink to="/categories" >Categories</NavLink></li>
