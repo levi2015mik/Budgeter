@@ -1,11 +1,11 @@
 import React from "react";
 import css from './Header.module.css'
 import { NavLink} from "react-router-dom";
-function Header(props) {
+function Header() {
     return(
         <header className={css.header}>
 
-            <img src={"/icons8-doodle-64.png"} className={css.logo} alt={""}/>
+            <img src={"icons8-doodle-64.png"} className={css.logo} alt={""}/>
             <h1>Personal accounting application</h1>
             <ul>
                 <li><NavLink to="/" >Home</NavLink></li>
