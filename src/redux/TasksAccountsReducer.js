@@ -8,13 +8,7 @@ const ADD_CATEGORIES = "ADD_CATEGORIES";
 
 
 const DEFAULT_STATE = {
-    tasks:[
-        {name:"Торт с марципаном", id:0, accepted:false, activated:1568581200000},
-        {name:"Укроп", id:1, accepted:false, activated:1568581200640},
-        {name:"Горчица", id:2, accepted:false, activated:1568667600000},
-        {name:"Набор юный террорист из супермаркета", id:3, accepted:false, activated:1568667600500},
-        {name:"Шакшука с кофе", id:4, accepted:false, activated:1568667600720}
-    ],
+    tasks:[],
     accounts:[],
     newAccountId:0,
     nextTaskId: 5,

@@ -170,7 +170,7 @@ function getCategoryAVGTime(category) {
 
     let sum = intervals.reduce((memo,el)=>memo + el,0);
 
-    let res = sum/intervals.length;
+    let res = sum/(intervals.length - 1);
     return !isNaN(res)? res : 0;
 }
 
@@ -180,6 +180,7 @@ function getCategoryAVGTime(category) {
  */
 function getCategoriesWithAVG(categories) {
     let names = Object.keys(categories);
+    if(names.length === 0) return []; // Проверка на ошибку, если данных о категориях нет
     let values = Object.values(categories);
 
     return values.map((el,i)=>{
