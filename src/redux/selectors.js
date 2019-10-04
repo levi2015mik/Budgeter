@@ -50,7 +50,8 @@ function AVGOfPeriod(accounts, period) {
     let avgRes = 0;
     let periods = countTimePeriodsInAccounts(accounts,period);
     accounts.forEach((el)=>{
-        avgRes += Number(el.price);
+        const num = el.price === undefined? 0: el.price;  // Устранение ошибки при не акцептованном счете
+        avgRes += Number(num);
     });
     let res = avgRes / periods;
     return !isNaN(res)? res : "-"
@@ -167,10 +168,8 @@ function getCategoryAVGTime(category) {
         if(i === 0) continue;
         intervals.push(category[i].time - category[i-1].time)
     }
-
     let sum = intervals.reduce((memo,el)=>memo + el,0);
-
-    let res = sum/(intervals.length - 1);
+    let res = sum/intervals.length;
     return !isNaN(res)? res : 0;
 }
 

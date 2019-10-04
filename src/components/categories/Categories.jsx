@@ -19,7 +19,7 @@ function Categories(props) {
             {props.categories.map(
                 (el,i)=> <Row
                     name={el.name}
-                    avg={el.avg}
+                    avg={el.avg.toFixed(2)}
                     avgTime={avgTimeFmt(el.avgTime)}
                     key={i} />)}
             </tbody>
