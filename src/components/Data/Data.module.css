@@ -11,3 +11,34 @@
     margin: 0.2em;
     color: #be0000;
 }
+
+.data .spoiler{
+    border: 1px solid #ccc;
+    padding-left: 0.5em;
+}
+.data .hided{
+    border: 1px solid #ccc;
+    border-top: 0;
+    padding: 0.2em;
+    background: #fff6f6;
+}
+.data .hided.hidden{
+    display: none;
+}
+
+.data .fileLoader{
+    margin: 2em 0;
+    border:2px dashed #68abad;
+    border-radius: 15px;
+    padding: 2em;
+    background: #a6fdff;
+    width: 20em;
+    height: 14em;
+    font-size: 0.6em;
+    color: #666666;
+    text-align: center;
+}
+
+.data .fileLoader input{
+    display: none;
+}
