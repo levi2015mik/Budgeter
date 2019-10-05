@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "95886b1353def07f24b5cc1d65488843",
+    "revision": "42bfe6c5c01653449d92b8f5751821b8",
     "url": "/Budgeter/index.html"
   },
   {
-    "revision": "bd7c51846d3540f5dca7",
+    "revision": "6cf5fe716f0703e312a8",
     "url": "/Budgeter/static/css/main.8b22e78c.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Budgeter/static/js/2.48b42e02.chunk.js"
   },
   {
-    "revision": "bd7c51846d3540f5dca7",
-    "url": "/Budgeter/static/js/main.d318b217.chunk.js"
+    "revision": "6cf5fe716f0703e312a8",
+    "url": "/Budgeter/static/js/main.78b56c7d.chunk.js"
   },
   {
     "revision": "41cd0c6ea819a6a15bfd",
