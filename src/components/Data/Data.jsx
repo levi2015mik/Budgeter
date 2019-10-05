@@ -55,8 +55,16 @@ function Data(props) {
         let reader = new FileReader();
         reader.readAsText(file,"CP1251");
         reader.onload = function(event) {
-            let csvData = event.target.result;
-            console.log(csvData.split("\r"))
+            let fileData = event.target.result;
+            let type = file.name.split(".")[1];
+            switch (type) {
+                case "csv": break;
+                case "json":
+                    setJsonDump(fileData);
+                    save();
+                    break;
+                default: alert("Uncorrect file type")
+            }
         };
     }
 
