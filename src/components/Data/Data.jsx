@@ -52,20 +52,18 @@ function Data(props) {
     async function chFile(file) {
         // корректное чтение файла из кодировки 1251 + разнесение на массивы по строкам
         //TODO Перенести в Actor и сделать заполнение tasks accounts categories с контролем коллизий по времени и обработкой ошибок
-        let reader = new FileReader();
-        reader.readAsText(file,"CP1251");
-        reader.onload = function(event) {
-            let fileData = event.target.result;
-            let type = file.name.split(".")[1];
-            switch (type) {
-                case "csv": break;
-                case "json":
-                    setJsonDump(fileData);
-                    save();
-                    break;
-                default: alert("Uncorrect file type")
+        let type = file.name.split(".")[1];
+        if(type === "json"){
+            let reader = new FileReader();
+            reader.readAsText(file,"utf8");
+            reader.onload = function(event) {
+                let fileData = event.target.result;
+                setJsonDump(fileData);
+                save();
             }
-        };
+        }
+        else if(type === "csv"){}
+        else{}
     }
 
     return (<div className={css.data}>
