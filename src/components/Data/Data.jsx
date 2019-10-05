@@ -28,10 +28,16 @@ function Data(props) {
         window.location.reload()
     }
 
-    function save(){
+    /**
+     * Сохранение данных из Textarea-> jsonDump или из файла, полученных в параметре val в state
+     * @param {string} val
+     */
+    function save(val){
+        let data = typeof val === "string"? val:jsonDump;
+        // Это val нужно для исправления ошибки - из-за асинхронности хука данные не могут быть сохранены
         let dataObj = {};
         try{
-            dataObj = JSON.parse(jsonDump);
+            dataObj = JSON.parse(data);
         }catch (e) {
             alert("Data is uncorrect");
             return;
@@ -48,18 +54,23 @@ function Data(props) {
         JSONLink.current.href = URL.createObjectURL(data)
     },[jsonDump,JSONLink]);
 
-    //////////////////
-    async function chFile(file) {
-        // корректное чтение файла из кодировки 1251 + разнесение на массивы по строкам
-        //TODO Перенести в Actor и сделать заполнение tasks accounts categories с контролем коллизий по времени и обработкой ошибок
+    /**
+     * Обработка полученного файла.
+     * - JSON просто заменяет пользовательские данные, подменив собой файл state.TaskAccountReducer
+     * @param file
+     */
+    function chFile(file) {
+
         let type = file.name.split(".")[1];
         if(type === "json"){
             let reader = new FileReader();
             reader.readAsText(file,"utf8");
             reader.onload = function(event) {
                 let fileData = event.target.result;
-                setJsonDump(fileData);
-                save();
+                let next = window.confirm("Reload all user information from file?");
+                if(!next) return;
+                setJsonDump(fileData); // Хук асинхронный. Поэтому save просто не получает его данные
+                save(fileData);
             }
         }
         else if(type === "csv"){}
